@@ -38,7 +38,9 @@
 <nav>
     <nav class="navbar navbar-default">
         <ul class="nav navbar-nav">
-            <li><a href="${homeUrl}">${home}</a></li>
+            <li>
+                <a href="/index?page=1&price_from=${sessionScope.price_from}&price_to=${sessionScope.price_to}">${home}</a>
+            </li>
             <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

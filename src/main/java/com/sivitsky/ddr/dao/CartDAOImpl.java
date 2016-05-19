@@ -30,12 +30,8 @@ public class CartDAOImpl implements CartDAO {
                 .setParameter("user", user).uniqueResult();
     }
 
-    public void removeCart(Long id) {
-        Cart cart = (Cart) sessionFactory.getCurrentSession().load(Cart.class, id);
-        if (null != cart) {
-            sessionFactory.getCurrentSession().delete(cart);
-        }
-
+    public void removeCart(Cart cart) {
+        sessionFactory.getCurrentSession().delete(cart);
     }
 
     public void replaceCartInOrder(Cart cart_from, Cart cart_to) {

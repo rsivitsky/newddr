@@ -110,6 +110,8 @@ public class HomeController {
                     orderService.saveOrder(or);
                 }
             }
+            cartService.removeCart(cartService.getCartByUser((User) session.getAttribute("anonym")));
+            userService.removeUser((User) session.getAttribute("anonym"));
 
             cart = new_cart;
             Object cartInfo = orderService.getOrderTotalByUserId(user);
@@ -172,7 +174,7 @@ public class HomeController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.POST)
     public String startPagePost(Model model, HttpServletRequest httpServletRequest) {
         Integer page = 1;
-        Integer recordsPerPage = 5;
+        Integer recordsPerPage = 2;
         if (httpServletRequest.getParameter("page") != null)
             page = Integer.parseInt(httpServletRequest.getParameter("page"));
 

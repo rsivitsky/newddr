@@ -42,11 +42,8 @@ public class UserDAOImpl implements UserDAO {
                 .setParameter("email", email).uniqueResult();
     }
 
-    public void removeUser(Long id) {
-        User user = (User) sessionFactory.getCurrentSession().load(User.class, id);
-        if (null != user) {
-            sessionFactory.getCurrentSession().delete(user);
-        }
+    public void removeUser(User user) {
+        sessionFactory.getCurrentSession().delete(user);
     }
 
 }

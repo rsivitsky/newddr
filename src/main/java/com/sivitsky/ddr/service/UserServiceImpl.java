@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void removeUser(Long id) {
-        this.userDAO.removeUser(id);
+    public void removeUser(User user) {
+        this.userDAO.removeUser(user);
     }
 }
