@@ -110,8 +110,12 @@ public class HomeController {
                     orderService.saveOrder(or);
                 }
             }
-            cartService.removeCart(cartService.getCartByUser((User) session.getAttribute("anonym")));
-            userService.removeUser((User) session.getAttribute("anonym"));
+
+            if (session.getAttribute("anonym") != null) {
+                cartService.removeCart(cartService.getCartByUser((User) session.getAttribute("anonym")));
+                userService.removeUser((User) session.getAttribute("anonym"));
+                session.removeAttribute("anonym");
+            }
 
             cart = new_cart;
             Object cartInfo = orderService.getOrderTotalByUserId(user);

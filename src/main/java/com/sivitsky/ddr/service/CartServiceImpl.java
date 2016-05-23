@@ -25,7 +25,9 @@ public class CartServiceImpl implements CartService {
 
     @Transactional
     public void removeCart(Cart cart) {
-        cartDAO.removeCart(cart);
+        if (cart != null) {
+            cartDAO.removeCart(cart);
+        }
     }
 
     @Transactional

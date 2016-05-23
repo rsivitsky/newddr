@@ -16,44 +16,50 @@
 <c:url var="cancelImgUrl" value="/resources/img/cancel.png"/>
 
 <div>
-    <h3>Cart</h3>
-    <table class="table table-hover table-responsive">
-        <tr>
-            <th>
-                <span class="label label-primary">${order_date}</span>
-            </th>
-            <th>
-                <span class="label label-primary">${order_status}</span>
-            </th>
-            <th>
-                <span class="label label-primary">${order_part}</span>
-            </th>
-            <th>
-                <span class="label label-primary">${order_num}</span>
-            </th>
-            <th>
-                <span class="label label-primary">${order_sum}</span>
-            </th>
-            <th>
-                <span class="label label-primary">${order_currency}</span>
-            </th>
-            <th>
-
-            </th>
-        </tr>
-        <c:forEach items="${orderListByUser}" var="order_item">
+    <form method="get" role="form">
+        <h3>Cart</h3>
+        <table class="table table-hover table-responsive">
             <tr>
-                <td><fmt:formatDate pattern="dd-MM-yyyy"
-                                    value="${order_item.booking_date}"/></td>
-                <td>${order_item.booking_status}</td>
-                <td>${order_item.part.part_name}</td>
-                <td><c:out value="${order_item.booking_num}"/></td>
-                <td>${order_item.booking_sum}</td>
-                <td>${order_item.offer.currency}</td>
-                <td><a href="<c:url value='/order/cancel/${order_item.booking_id}' />" title=${order_cancel}><img
-                        src="${cancelImgUrl}"/></a>
-                </td>
+                <th class="col-md-1">
+                    <span class="label label-primary">${order_date}</span>
+                </th>
+                <th class="col-md-1">
+                    <span class="label label-primary">${order_status}</span>
+                </th>
+                <th class="col-md-5">
+                    <span class="label label-primary">${order_part}</span>
+                </th>
+                <th class="col-md-1">
+                    <span class="label label-primary">${order_num}</span>
+                </th>
+                <th class="col-md-1">
+                    <span class="label label-primary">${order_sum}</span>
+                </th>
+                <th class="col-md-1">
+                    <span class="label label-primary">${order_currency}</span>
+                </th>
+                <th class="col-md-1">
+
+                </th>
             </tr>
-        </c:forEach>
-    </table>
+            <c:forEach items="${orderListByUser}" var="order_item">
+                <tr>
+                    <td><fmt:formatDate pattern="dd-MM-yyyy"
+                                        value="${order_item.booking_date}"/></td>
+                    <td>${order_item.booking_status}</td>
+                    <td>${order_item.part.part_name}</td>
+                    <td>
+                        <input type="number" min="1" class="form-control" name="booking_num"
+                               value=${order_item.booking_num}>
+                            <%-- <c:out value="${order_item.booking_num}"/>--%>
+                    </td>
+                    <td>${order_item.booking_sum}</td>
+                    <td>${order_item.offer.currency}</td>
+                    <td><a href="<c:url value='/order/cancel/${order_item.booking_id}' />" title=${order_cancel}><img
+                            src="${cancelImgUrl}"/></a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </form>
 </div>
