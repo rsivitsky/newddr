@@ -76,7 +76,7 @@ public class Order implements Serializable {
         this.offer = offer;
     }
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
@@ -114,7 +114,7 @@ public class Order implements Serializable {
         this.booking_sum = booking_sum;
     }
 
-    @ManyToOne(targetEntity = Cart.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Cart.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "cart_id")
     public Cart getCart() {
         return cart;

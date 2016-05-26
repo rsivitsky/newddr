@@ -14,6 +14,7 @@
 <spring:message code="label.cancel" var="order_cancel"/>
 
 <c:url var="cancelImgUrl" value="/resources/img/cancel.png"/>
+<c:url var="editImgUrl" value="/resources/img/edit.png"/>
 
 <div>
     <form method="get" role="form">
@@ -26,7 +27,7 @@
                 <th class="col-md-1">
                     <span class="label label-primary">${order_status}</span>
                 </th>
-                <th class="col-md-5">
+                <th class="col-md-4">
                     <span class="label label-primary">${order_part}</span>
                 </th>
                 <th class="col-md-1">
@@ -41,21 +42,23 @@
                 <th class="col-md-1">
 
                 </th>
+                <th class="col-md-1">
+
+                </th>
             </tr>
             <c:forEach items="${orderListByUser}" var="order_item">
+                <c:url var="editOrderUrl" value="/order/edit/${order_item.booking_id}"/>
+                <c:url var="cancelOrderUrl" value="/order/cancel/${order_item.booking_id}"/>
                 <tr>
                     <td><fmt:formatDate pattern="dd-MM-yyyy"
                                         value="${order_item.booking_date}"/></td>
                     <td>${order_item.booking_status}</td>
                     <td>${order_item.part.part_name}</td>
-                    <td>
-                        <input type="number" min="1" class="form-control" name="booking_num"
-                               value=${order_item.booking_num}>
-                            <%-- <c:out value="${order_item.booking_num}"/>--%>
-                    </td>
+                    <td>${order_item.booking_num}</td>
                     <td>${order_item.booking_sum}</td>
                     <td>${order_item.offer.currency}</td>
-                    <td><a href="<c:url value='/order/cancel/${order_item.booking_id}' />" title=${order_cancel}><img
+                    <td><a href="${editOrderUrl}"><img src="${editImgUrl}"/></a></td>
+                    <td><a href="${cancelOrderUrl}" title=${order_cancel}><img
                             src="${cancelImgUrl}"/></a>
                     </td>
                 </tr>

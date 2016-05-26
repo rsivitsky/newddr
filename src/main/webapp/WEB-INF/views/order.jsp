@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<spring:message code="label.order_date" var="order_date"/>
+<spring:message code="label.order_date" var="booking_date"/>
 <spring:message code="label.order_status" var="order_status"/>
 <spring:message code="label.order_user" var="order_user"/>
 <spring:message code="label.order_part" var="order_part"/>
@@ -29,7 +29,7 @@
     <table class="table table-hover table-responsive">
         <tr bgcolor="#87ceeb">
             <th>
-                <span class="label label-primary">${order_date}</span>
+                <span class="label label-primary">${booking_date}</span>
             </th>
             <th>
                 <span class="label label-primary">${order_part}</span>
@@ -52,7 +52,7 @@
         </tr>
         <tr>
             <td>
-                <form:input type="date" path="order_date" cssStyle="border: none"/>
+                <form:input type="date" path="booking_date" cssStyle="border: none"/>
             </td>
             <td>
                 <form:select path="part.part_id" name="part" items="${listPart}" itemValue="part_id"
@@ -67,7 +67,7 @@
                              cssStyle="border: none"/>
             </td>
             <td>
-                <form:input path="order_num" itemLabel="num"/>
+                <form:input path="booking_num" itemLabel="num"/>
             </td>
             <td>
                 <form:input path="booking_sum" itemLabel="sum"/>
@@ -80,11 +80,11 @@
             </td>
             <tr>
                 <td colspan="7">
-                    <c:if test="${!empty order.order_id}">
+                    <c:if test="${!empty order.booking_id}">
                         <input type="submit" class="btn btn-info"
                                value="<spring:message text="${edit}"/>"/>
                     </c:if>
-                    <c:if test="${empty order.order_id}">
+                    <c:if test="${empty order.booking_id}">
                         <input type="submit" class="btn btn-info"
                                value="<spring:message text="${add}"/>"/>
                     </c:if>
@@ -101,7 +101,7 @@
     <table class="table table-hover table-responsive">
         <tr bgcolor="#87ceeb">
             <th>
-                <span class="label label-primary">${order_date}</span>
+                <span class="label label-primary">${booking_date}</span>
             </th>
             <th>
                 <span class="label label-primary">${order_status}</span>
@@ -131,16 +131,17 @@
         <c:forEach items="${orderList}" var="order_item">
             <tr>
                 <td><fmt:formatDate pattern="dd-MM-yyyy"
-                                    value="${order_item.order_date}"/></td>
+                                    value="${order_item.booking_date}"/></td>
                 <td>${order_item.booking_status}</td>
                 <td>${order_item.user.firstname} ${order_item.user.lastname}</td>
                 <td>${order_item.part.part_name}</td>
-                <td>${order_item.order_num}</td>
+                <td>${order_item.booking_num}</td>
                 <td>${order_item.booking_sum}</td>
-                <td>${order_item.offer.currency.valuta_name}</td>
-                <td><a href="<c:url value='/order/edit/${order_item.order_id}' />" title=${edit}><img src="${editImgUrl}"/></a>
+                <td>${order_item.offer.currency}</td>
+                <td><a href="<c:url value='/order/edit/${order_item.booking_id}' />" title=${edit}><img
+                        src="${editImgUrl}"/></a>
                 </td>
-                <td><a href="<c:url value='/order/remove/${order_item.order_id}' />" title=${delete}><img
+                <td><a href="<c:url value='/order/remove/${order_item.booking_id}' />" title=${delete}><img
                         src="${deleteImgUrl}"/></a></td>
             </tr>
         </c:forEach>
