@@ -54,7 +54,7 @@
                                         value="${order_item.booking_date}"/></td>
                     <td>${order_item.booking_status}</td>
                     <td>${order_item.part.part_name}</td>
-                    <td>${order_item.booking_num}</td>
+                    <td><a href="${editOrderUrl}">${order_item.booking_num}</a></td>
                     <td>${order_item.booking_sum}</td>
                     <td>${order_item.offer.currency}</td>
                     <td><a href="${editOrderUrl}"><img src="${editImgUrl}"/></a></td>

@@ -10,10 +10,8 @@ import com.sivitsky.ddr.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,7 +19,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 @Controller
-@SessionAttributes({"cart", "user", "part", "cartInfo"})
+@SessionAttributes({"cart", "user", "part", "order", "cartInfo"})
 public class CartController {
     private OrderService orderService;
     private OfferService offerService;
@@ -57,6 +55,17 @@ public class CartController {
         return "redirect:/index?price_from=" + session.getAttribute("price_from") + "&price_to=" + session.getAttribute("price_to");
     }
 
+    @RequestMapping(value = "/cart/order/save", method = RequestMethod.POST)
+    public String addOrderPost(@ModelAttribute("order") Order order, BindingResult result) {
+        if (!result.hasErrors()) {
+            if (order.getBooking_num() > 0) {
+                order.setBooking_sum(order.getBooking_num() * order.getOffer().getOffer_price());
+                this.orderService.saveOrder(order);
+            }
+        }
+        return "redirect:/cart/info";
+    }
+
     @RequestMapping(value = "/cart/info", method = RequestMethod.GET)
     public String cartInfoByUserId(Model model, User user, HttpServletRequest httpRequest) throws ParseException {
         HttpSession session = httpRequest.getSession(true);
@@ -68,29 +77,4 @@ public class CartController {
         return "cart";
     }
 
-    @RequestMapping(value = "/order/cancel/{order_id}", method = RequestMethod.GET)
-    public String cancelCart(@PathVariable("order_id") Long booking_id, Model model, User user, HttpServletRequest httpRequest) {
-        orderService.cancelOrder(booking_id);
-        if (user.getUser_id() == null) {
-            HttpSession session = httpRequest.getSession(true);
-            Object cartInfo = orderService.getOrderTotalByUserId((User) session.getAttribute("anonym"));
-            if (cartInfo != null) {
-                model.addAttribute("cartInfo", cartInfo);
-            } else {
-                int[] cartIsNull = {0, 0};
-                model.addAttribute("cartInfo", cartIsNull);
-            }
-            model.addAttribute("orderListByUser", orderService.getOrdersByUserId((User) session.getAttribute("anonym")));
-        } else {
-            Object cartInfo = orderService.getOrderTotalByUserId(user);
-            if (cartInfo != null) {
-                model.addAttribute("cartInfo", cartInfo);
-            } else {
-                int[] cartIsNull = {0, 0};
-                model.addAttribute("cartInfo", cartIsNull);
-            }
-            model.addAttribute("orderListByUser", orderService.getOrdersByUserId(user));
-        }
-        return "cart";
-    }
 }

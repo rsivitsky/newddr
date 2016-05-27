@@ -2,6 +2,7 @@ package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Order;
 import com.sivitsky.ddr.model.OrderStatus;
+import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.service.OfferService;
 import com.sivitsky.ddr.service.OrderService;
 import com.sivitsky.ddr.service.PartService;
@@ -12,8 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
-@SessionAttributes({"order"})
+@SessionAttributes({"order", "user"})
 public class OrderController {
 
     @Autowired
@@ -51,10 +55,36 @@ public class OrderController {
     @RequestMapping("/order/edit/{order_id}")
     public String editOrder(@PathVariable("order_id") Long order_id, Model model) {
         model.addAttribute("order", this.orderService.getOrderById(order_id));
-        model.addAttribute("listOffers", this.offerService.listOffer());
+      /*  model.addAttribute("listOffers", this.offerService.listOffer());
         model.addAttribute("listUser", this.userService.listUsers());
         model.addAttribute("listPart", this.partService.listPart());
-        model.addAttribute("Status", OrderStatus.values());
-        return "order";
+        model.addAttribute("Status", OrderStatus.values());*/
+        return "order_edit";
+    }
+
+    @RequestMapping(value = "/order/cancel/{order_id}", method = RequestMethod.GET)
+    public String cancelCart(@PathVariable("order_id") Long booking_id, Model model, User user, HttpServletRequest httpRequest) {
+        orderService.cancelOrder(booking_id);
+        if (user.getUser_id() == null) {
+            HttpSession session = httpRequest.getSession(true);
+            Object cartInfo = orderService.getOrderTotalByUserId((User) session.getAttribute("anonym"));
+            if (cartInfo != null) {
+                model.addAttribute("cartInfo", cartInfo);
+            } else {
+                int[] cartIsNull = {0, 0};
+                model.addAttribute("cartInfo", cartIsNull);
+            }
+            model.addAttribute("orderListByUser", orderService.getOrdersByUserId((User) session.getAttribute("anonym")));
+        } else {
+            Object cartInfo = orderService.getOrderTotalByUserId(user);
+            if (cartInfo != null) {
+                model.addAttribute("cartInfo", cartInfo);
+            } else {
+                int[] cartIsNull = {0, 0};
+                model.addAttribute("cartInfo", cartIsNull);
+            }
+            model.addAttribute("orderListByUser", orderService.getOrdersByUserId(user));
+        }
+        return "cart";
     }
 }

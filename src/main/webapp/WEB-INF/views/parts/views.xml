@@ -54,4 +54,7 @@
     <definition name="account" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/account.jsp"/>
     </definition>
+    <definition name="order_edit" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/order_edit.jsp"/>
+    </definition>
 </tiles-definitions>
