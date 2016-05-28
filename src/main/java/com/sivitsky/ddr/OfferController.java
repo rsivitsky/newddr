@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 @Controller
 @SessionAttributes({"offer", "listOffers", "vendor_id", "user", "part", "listPartsOffers"})
@@ -65,6 +66,7 @@ public class OfferController {
 
     @RequestMapping(value = "/offers/add", method = RequestMethod.POST)
     public String addOffer(@ModelAttribute("offer") Offer offer, BindingResult result) {
+        offer.setOffer_sum(offer.getOffer_price().multiply(BigDecimal.valueOf(offer.getOffer_num())));
         this.offerService.saveOffer(offer);
         return "redirect:/offers";
     }

@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -28,9 +29,9 @@ public class Offer implements Serializable {
     private Long offer_id;
 
     private Date offer_date;
-    private Float offer_price;
+    private BigDecimal offer_price;
     private Integer offer_num;
-    private Float offer_sum;
+    private BigDecimal offer_sum;
 
     @ManyToOne(targetEntity = Vendor.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "vendor_id")
@@ -60,11 +61,11 @@ public class Offer implements Serializable {
     }
 
     @Column(name = "offer_sum")
-    public Float getOffer_sum() {
+    public BigDecimal getOffer_sum() {
         return offer_sum;
     }
 
-    public void setOffer_sum(Float offer_sum) {
+    public void setOffer_sum(BigDecimal offer_sum) {
         this.offer_sum = offer_sum;
     }
 
@@ -79,11 +80,11 @@ public class Offer implements Serializable {
     }
 
     @Column(name = "offer_price")
-    public Float getOffer_price() {
+    public BigDecimal getOffer_price() {
         return offer_price;
     }
 
-    public void setOffer_price(Float offer_price) {
+    public void setOffer_price(BigDecimal offer_price) {
         this.offer_price = offer_price;
     }
 

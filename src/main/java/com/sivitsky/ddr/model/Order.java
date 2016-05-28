@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -24,7 +25,7 @@ public class Order implements Serializable {
 
     private Long booking_id;
     private Integer booking_num;
-    private Float booking_sum;
+    private BigDecimal booking_sum;
     private Date booking_date;
     private String booking_status;
     private Offer offer;
@@ -106,11 +107,11 @@ public class Order implements Serializable {
     }
 
     @Column(name = "booking_sum")
-    public Float getBooking_sum() {
+    public BigDecimal getBooking_sum() {
         return booking_sum;
     }
 
-    public void setBooking_sum(Float booking_sum) {
+    public void setBooking_sum(BigDecimal booking_sum) {
         this.booking_sum = booking_sum;
     }
 

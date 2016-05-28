@@ -55,10 +55,6 @@ public class OrderController {
     @RequestMapping("/order/edit/{order_id}")
     public String editOrder(@PathVariable("order_id") Long order_id, Model model) {
         model.addAttribute("order", this.orderService.getOrderById(order_id));
-      /*  model.addAttribute("listOffers", this.offerService.listOffer());
-        model.addAttribute("listUser", this.userService.listUsers());
-        model.addAttribute("listPart", this.partService.listPart());
-        model.addAttribute("Status", OrderStatus.values());*/
         return "order_edit";
     }
 

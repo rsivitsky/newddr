@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -46,11 +47,11 @@ public class CartController {
         order.setBooking_date(new Date());
         order.setPart(offer.getPart());
         order.setBooking_num(1);
-        order.setBooking_sum(1 * offer.getOffer_price());
+        order.setBooking_sum(offer.getOffer_price().multiply(BigDecimal.valueOf(1)));
         if (cart.getCart_id() != null) {
             order.setCart(cart);
+            order.setUser(cart.getUser());
         }
-        order.setUser((User) session.getAttribute("anonym"));
         orderService.saveOrder(order);
         return "redirect:/index?price_from=" + session.getAttribute("price_from") + "&price_to=" + session.getAttribute("price_to");
     }
@@ -59,7 +60,7 @@ public class CartController {
     public String addOrderPost(@ModelAttribute("order") Order order, BindingResult result) {
         if (!result.hasErrors()) {
             if (order.getBooking_num() > 0) {
-                order.setBooking_sum(order.getBooking_num() * order.getOffer().getOffer_price());
+                order.setBooking_sum(order.getOffer().getOffer_price().multiply(BigDecimal.valueOf(order.getBooking_num())));
                 this.orderService.saveOrder(order);
             }
         }

@@ -41,7 +41,7 @@
 
 <div class="col-md-8">
     <form:form action="${addAction}" commandName="offer">
-        <table class="table table-hover">
+        <table class="table table-hover table-responsive">
             <tr bgcolor="#87ceeb">
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <th>
@@ -93,8 +93,8 @@
                 <td>
                     <form:input path="offer_num" name="offer_num" cssStyle="border: none"/>
                 </td>
-                <td>
-                    <form:input path="offer_sum" name="offer_sum" cssStyle="border: none"/>
+                <td style="width: auto">
+                    <form:input path="offer_sum" readonly="true" name="offer_sum" cssStyle="border: none"/>
                 </td>
             </tr>
             <tr>

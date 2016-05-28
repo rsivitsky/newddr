@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.Iterator;
 
 @Component
@@ -54,7 +55,8 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
                             offer.setOffer_date(nextCell.getDateCellValue());
                             break;
                         case 2:
-                            offer.setOffer_price(Float.parseFloat(getCellValue(nextCell).toString()));
+                            // offer.setOffer_price();
+                            offer.setOffer_price(BigDecimal.valueOf(Float.parseFloat(getCellValue(nextCell).toString())));
                             break;
                         case 3:
                             try {
@@ -80,7 +82,7 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
                             offer.setOffer_num((int) nextCell.getNumericCellValue());
                             break;
                         case 6:
-                            offer.setOffer_sum((float) (nextCell.getNumericCellValue()));
+                            offer.setOffer_sum((BigDecimal.valueOf(nextCell.getNumericCellValue())));
                             break;
                     }
                 }
