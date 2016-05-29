@@ -1,17 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
-         pageEncoding="utf8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-</head>
-<body>
-<h1>
-    Add a Part
-</h1>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:url var="addAction" value="/part/add"></c:url>
+
+<div>
 <form:form action="${addAction}" commandName="part" enctype="multipart/form-data">
     <table>
         <tr>
@@ -42,5 +37,4 @@
         </tr>
     </table>
 </form:form>
-</body>
-</html>
+</div>

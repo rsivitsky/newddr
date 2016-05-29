@@ -26,21 +26,8 @@
 <spring:url var="loadAction" value="/offers/load"/>
 <spring:url value="/offers" var="cancelAction"/>
 
-<div class="col-md-4">
-    <form:form action="${loadAction}" method="post" enctype="multipart/form-data">
-        <c:if test="${user.vendor==null}">
-            <h12 style="background-color: #ff69b4"> ${user_dont_have_vendor} </h12>
-        </c:if>
-        <input type="file" name="offers_file">
-        <br>
-        <input type="submit"
-               value="<spring:message text="load"/>"/>
-    </form:form>
 
-</div>
-
-<div class="col-md-8">
-    <form:form action="${addAction}" commandName="offer">
+<form:form action="${addAction}" commandName="offer" enctype="multipart/form-data">
         <table class="table table-hover table-responsive">
             <tr bgcolor="#87ceeb">
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -93,12 +80,12 @@
                 <td>
                     <form:input path="offer_num" name="offer_num" cssStyle="border: none"/>
                 </td>
-                <td style="width: auto">
+                <td>
                     <form:input path="offer_sum" readonly="true" name="offer_sum" cssStyle="border: none"/>
                 </td>
             </tr>
             <tr>
-                <td colspan="5">
+                <td colspan="12">
                     <c:if test="${!empty offer.offer_id}">
                         <input type="submit" class="btn btn-info"
                                value="<spring:message text="${edit}"/>"/>
@@ -112,10 +99,21 @@
             </tr>
         </table>
     </form:form>
+<br>
 
-    <c:if test="${!empty listOffers}">
+<div class="col-md-4">
+    <form:form action="${loadAction}" method="post" enctype="multipart/form-data">
+        <c:if test="${user.vendor==null}">
+            <h12 style="background-color: #ff69b4"> ${user_dont_have_vendor} </h12>
+        </c:if>
+        <input type="file" name="offers_file" class="btn btn-info">
         <br>
-
+        <input type="submit" class="btn btn-info"
+               value="<spring:message text="load"/>"/>
+    </form:form>
+</div>
+<div class="col-md-8">
+    <c:if test="${!empty listOffers}">
         <h3>${offer_list}</h3>
         <table class="table table-hover table-responsive">
             <tr bgcolor="#87ceeb" >

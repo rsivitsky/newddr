@@ -12,11 +12,11 @@
     <c:if test="${!empty listPart}">
         <table class="table table-hover">
             <c:forEach items="${listPart}" var="part">
-                <c:url var="editPartUrl" value="/part/edit/${part[0]}"/>
-                <c:url var="deletePartUrl" value="/part/remove/${part[0]}"/>
-                <c:url var="editDescUrl" value="/part/descript/edit/${part[0]}"/>
-                <c:url var="partDescription" value="/part/description/${part[0]}"/>
-                <c:url var="partPhotoUrl" value="/part/photo/${part[0]}"/>
+                <c:url var="editPartUrl" value="/part/edit/${part[1]}"/>
+                <c:url var="deletePartUrl" value="/part/remove/${part[1]}"/>
+                <c:url var="editDescUrl" value="/part/descript/edit/${part[1]}"/>
+                <c:url var="partDescription" value="/part/description/${part[1]}"/>
+                <c:url var="partPhotoUrl" value="/part/photo/${part[1]}"/>
                 <tr>
                     <td><a href="${partDescription}"><img src="${partPhotoUrl}" class="img-rounded" height="40" width="150"/></a>
                     <td>${part[0]}</td>
