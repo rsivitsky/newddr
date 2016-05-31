@@ -2,6 +2,7 @@ package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Part;
 import com.sivitsky.ddr.service.DescriptionService;
+import com.sivitsky.ddr.service.ManufacturService;
 import com.sivitsky.ddr.service.PartService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,15 @@ public class PartController {
     @Autowired
     private PartService partService;
     @Autowired
+    private ManufacturService manufacturService;
+    @Autowired
     private DescriptionService descriptionService;
 
     @RequestMapping(value = "/part/list", method = RequestMethod.GET)
     public String startPart(Model model) {
         model.addAttribute("part", new Part());
-        model.addAttribute("listPart", partService.listPartWithDetail(1, 10));
+        model.addAttribute("listPart", partService.listPart());
+        model.addAttribute("listManufactur", manufacturService.listManufactur());
         return "part";
     }
 
@@ -61,8 +65,11 @@ public class PartController {
 
     @RequestMapping("/part/edit/{part_id}")
     public String editPart(@PathVariable("part_id") Long part_id, Model model) {
-        model.addAttribute("part", this.partService.getPartById(part_id));
-        return "add_part";
+        model.addAttribute("part", this.partService.getPartById(part_id).getManufactur());
+        model.addAttribute("listPart", partService.listPart());
+        model.addAttribute("listManufactur", manufacturService.listManufactur());
+        //return "add_part";
+        return "part";
     }
 
     @RequestMapping(value = "/part/description/{part_id}", method = RequestMethod.GET)
