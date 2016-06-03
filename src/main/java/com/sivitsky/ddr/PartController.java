@@ -41,7 +41,7 @@ public class PartController {
 
     @RequestMapping(value = "/part/add", method = RequestMethod.POST)
     public String addPartPost(@ModelAttribute("part") Part part, @RequestParam(value = "img_file", required = false) javax.servlet.http.Part img_file, BindingResult result) {
-        if (img_file != null) {
+        if (img_file.getSize() != 0) {
             byte[] fileContent = null;
             try {
                 InputStream inputStream = img_file.getInputStream();
@@ -65,7 +65,7 @@ public class PartController {
 
     @RequestMapping("/part/edit/{part_id}")
     public String editPart(@PathVariable("part_id") Long part_id, Model model) {
-        model.addAttribute("part", this.partService.getPartById(part_id).getManufactur());
+        model.addAttribute("part", this.partService.getPartById(part_id));
         model.addAttribute("listPart", partService.listPart());
         model.addAttribute("listManufactur", manufacturService.listManufactur());
         //return "add_part";
