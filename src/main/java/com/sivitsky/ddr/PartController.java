@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -40,20 +41,25 @@ public class PartController {
     }
 
     @RequestMapping(value = "/part/add", method = RequestMethod.POST)
-    public String addPartPost(@ModelAttribute("part") Part part, @RequestParam(value = "img_file", required = false) javax.servlet.http.Part img_file, BindingResult result) {
-        if (img_file.getSize() != 0) {
-            byte[] fileContent = null;
-            try {
-                InputStream inputStream = img_file.getInputStream();
-                fileContent = IOUtils.toByteArray(inputStream);
-            } catch (IOException ex) {
-                System.out.println();
+    public String addPartPost(@Valid Part part, BindingResult result, @RequestParam(value = "img_file", required = false) javax.servlet.http.Part img_file) {
+        if (result.hasErrors()) {
+            //return "part";
+            return "redirect:/part/list";
+        } else {
+            if (img_file.getSize() != 0) {
+                byte[] fileContent = null;
+                try {
+                    InputStream inputStream = img_file.getInputStream();
+                    fileContent = IOUtils.toByteArray(inputStream);
+                } catch (IOException ex) {
+                    System.out.println();
+                }
+                if (fileContent != null) {
+                    part.setPhoto(fileContent);
+                }
             }
-            if (fileContent != null) {
-                part.setPhoto(fileContent);
-            }
+            this.partService.savePart(part);
         }
-        this.partService.savePart(part);
         return "redirect:/part/list";
     }
 

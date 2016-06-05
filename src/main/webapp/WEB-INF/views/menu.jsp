@@ -11,12 +11,11 @@
 <spring:message code="label.vendor" var="vendor"/>
 <spring:message code="label.account" var="account"/>
 <spring:message code="label.measure" var="measure"/>
-<spring:message code="label.currency" var="currency"/>
+
 <spring:message code="label.manufactur" var="manufactur"/>
 <spring:message code="label.part" var="part"/>
 <spring:message code="label.user" var="user"/>
 <spring:message code="label.specification" var="specification"/>
-<spring:message code="label.typeOfSpec" var="typeOfSpec"/>
 
 <spring:message code="label.description" var="description"/>
 
@@ -24,12 +23,12 @@
 
 <spring:url var="partUrl" value="/part/list"/>
 <spring:url var="userUrl" value="/user"/>
-<spring:url var="currencyUrl" value="/currency"/>
+
 <spring:url var="manufacturUrl" value="/manufactur"/>
 <spring:url var="vendorUrl" value="/vendor"/>
 <spring:url var="measureUrl" value="/measure"/>
 <spring:url var="specificationUrl" value="/specification"/>
-<spring:url var="typeOfSpecUrl" value="/tspec"/>
+
 <spring:url var="homeUrl" value="/index"/>
 <spring:url var="offerUrl" value="/offers"/>
 <spring:url var="orderUrl" value="/order/list"/>
@@ -53,9 +52,9 @@
                         <li><a href=${userUrl}>${user}</a></li>
                         <li><a href=${partUrl}>${part}</a></li>
                         <li><a href=${measureUrl}>${measure}</a></li>
-                        <li><a href=${typeOfSpecUrl}>${typeOfSpec}</a></li>
+
                         <li><a href=${specificationUrl}>${specification}</a></li>
-                        <li><a href=${currencyUrl}>${currency}</a></li>
+
                         <li><a href=${manufacturUrl}>${manufactur}</a></li>
                         <li><a href=${vendorUrl}>${vendor}</a></li>
                     </ul>

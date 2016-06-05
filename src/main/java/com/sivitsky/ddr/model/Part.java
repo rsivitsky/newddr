@@ -1,6 +1,7 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -13,6 +14,7 @@ import java.io.Serializable;
 )
 public class Part implements Serializable {
     private Long part_id;
+    @Size(min = 3, message = "The part name must be at least 3 characters long.")
     private String part_name;
     private Manufactur manufactur;
     private byte[] photo;

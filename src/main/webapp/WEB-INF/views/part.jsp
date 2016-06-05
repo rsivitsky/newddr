@@ -13,6 +13,11 @@
 <spring:message code="label.edit" var="edit"/>
 <spring:message code="label.public_cancel" var="cancel"/>
 <spring:message code="label.add" var="add"/>
+<spring:message code="label.name" var="name"/>
+<spring:message code="label.manufactur" var="manufactur"/>
+<spring:message code="label.part_photo" var="part_photo"/>
+<spring:message code="label.select_photo" var="select_photo"/>
+<spring:message code="label.select_file" var="select_file"/>
 
 <spring:url var="addAction" value="/part/add"/>
 <spring:url value="/part/list" var="cancelAction"/>
@@ -22,22 +27,23 @@
     <table class="table table-hover table-responsive">
         <tr bgcolor="#87ceeb">
             <th>
-                наименование
+                    ${name}
             </th>
             <th>
-                производитель
+                    ${manufactur}
             </th>
             <th>
-                изображение
+                    ${part_photo}
             </th>
             <th>
-                выбрать изображение
+                    ${select_photo}
             </th>
 
         </tr>
         <tr>
             <td>
                 <form:input path="part_name" name="part_name" cssStyle="border: none"/>
+                <form:errors path="part_name" cssClass="error"/>
             </td>
             <td>
                 <form:select path="manufactur.manufactur_id" name="manufactur" items="${listManufactur}"
@@ -51,7 +57,7 @@
                 </c:if>
             </td>
             <td>
-                <input name="img_file" type="file"/>
+                <input name="img_file" type='file'/>
             </td>
         </tr>
         <tr>

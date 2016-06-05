@@ -101,7 +101,7 @@
 			<td>${useritem.user_id}</td>
 			<td>${useritem.firstname}</td>
 			<td>${useritem.lastname}</td>
-			<td>${useritem.role.role_name}</td>
+			<td>${useritem.role}</td>
 			<td><a href="<c:url value='/edit/${useritem.user_id}' />" title=${edit}><img src="${editImgUrl}"/></a>
 			<td><a href="<c:url value='/remove/${useritem.user_id}' />" title=${delete}><img
 				src="${deleteImgUrl}"/></a>

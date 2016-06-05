@@ -45,7 +45,9 @@ public class LoginController {
     @RequestMapping(value = "/registration")
     public String addUser(Model model) {
         model.addAttribute("user", new User());
-        return "quick_registration";
+        model.addAttribute("listRolesWithoutAdmin", roleService.getRolesWithoutAdmin());
+        //return "quick_registration";
+        return "registration";
     }
 
     @RequestMapping(value = "/registration/save", method = RequestMethod.POST)

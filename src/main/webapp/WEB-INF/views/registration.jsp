@@ -82,8 +82,14 @@
                 <th>
                         ${user_role}
                 </th>
+                    <%-- <td>
+                         <form:select path="role">
+                             <form:option value="NONE" label="--- Select ---"/>
+                             <form:options items="${listRolesWithoutAdmin}"/>
+                         </form:select>
+                     </td> --%>
                 <td>
-                    <form:select path="role.role_id" id="select_role" onchange="
+                    <form:select path="role" id="select_role" onchange="
                     {
                     if(
                        this.options[this.selectedIndex].label != 'ROLE_VENDOR')
