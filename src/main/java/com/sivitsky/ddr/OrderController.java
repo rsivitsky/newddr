@@ -58,6 +58,12 @@ public class OrderController {
         return "order_edit";
     }
 
+    @RequestMapping("/order/place/${order_item.booking_id}")
+    public String placeOrder() {
+
+        return "redirect:/cart/info";
+    }
+
     @RequestMapping(value = "/order/cancel/{order_id}", method = RequestMethod.GET)
     public String cancelCart(@PathVariable("order_id") Long booking_id, Model model, User user, HttpServletRequest httpRequest) {
         orderService.cancelOrder(booking_id);

@@ -1,5 +1,5 @@
 package com.sivitsky.ddr.model;
 
 public enum OrderStatus {
-    NEW, PAID, CLOSED, CANCELED
+    NEW, ORDERED, PAID, CLOSED, CANCELED
 }

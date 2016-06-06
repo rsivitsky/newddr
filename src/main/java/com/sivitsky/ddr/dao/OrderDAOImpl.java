@@ -45,7 +45,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     @SuppressWarnings("unchecked")
     public List<Order> listOrderByUserId(User user) {
-        String[] booking_status = {OrderStatus.NEW.toString(), OrderStatus.PAID.toString()};
+        String[] booking_status = {OrderStatus.NEW.toString(), OrderStatus.ORDERED.toString(), OrderStatus.PAID.toString()};
         return sessionFactory.getCurrentSession().getNamedQuery("Order.getOrderesByUserId")
                 .setParameter("user", user)
                 .setParameter("booking_status", booking_status)

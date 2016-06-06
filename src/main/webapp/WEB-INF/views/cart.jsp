@@ -12,9 +12,11 @@
 <spring:message code="label.order_currency" var="order_currency"/>
 <spring:message code="label.order_sum" var="order_sum"/>
 <spring:message code="label.cancel" var="order_cancel"/>
+<spring:message code="label.place_you_order" var="place_you_order"/>
 
 <c:url var="cancelImgUrl" value="/resources/img/cancel.png"/>
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
+<c:set var="status_new" scope="request" value="NEW"/>
 
 <div>
     <form method="get" role="form">
@@ -27,7 +29,7 @@
                 <th class="col-md-1">
                     <span class="label label-primary">${order_status}</span>
                 </th>
-                <th class="col-md-4">
+                <th class="col-md-3">
                     <span class="label label-primary">${order_part}</span>
                 </th>
                 <th class="col-md-1">
@@ -45,10 +47,14 @@
                 <th class="col-md-1">
 
                 </th>
+                <th class="col-md-1">
+
+                </th>
             </tr>
             <c:forEach items="${orderListByUser}" var="order_item">
                 <c:url var="editOrderUrl" value="/order/edit/${order_item.booking_id}"/>
                 <c:url var="cancelOrderUrl" value="/order/cancel/${order_item.booking_id}"/>
+                <c:url var="placeYourOrderUrl" value="/order/place/${order_item.booking_id}"/>
                 <tr>
                     <td><fmt:formatDate pattern="dd-MM-yyyy"
                                         value="${order_item.booking_date}"/></td>
@@ -57,12 +63,25 @@
                     <td><a href="${editOrderUrl}">${order_item.booking_num}</a></td>
                     <td>${order_item.booking_sum}</td>
                     <td>${order_item.offer.currency}</td>
+                    <td>
+                        <c:if test="${!empty order_item.booking_status}">
+                            <c:if test="${order_item.booking_status==status_new}">
+                                <a href="${placeYourOrderUrl}">${place_you_order}</a>
+                            </c:if>
+                        </c:if>
+                    </td>
                     <td><a href="${editOrderUrl}"><img src="${editImgUrl}"/></a></td>
                     <td><a href="${cancelOrderUrl}" title=${order_cancel}><img
                             src="${cancelImgUrl}"/></a>
                     </td>
                 </tr>
             </c:forEach>
+            <tr>
+                <td class="col-md-offset-1">
+                    place_all_your_orderes
+                </td>
+            </tr>
         </table>
+
     </form>
 </div>
