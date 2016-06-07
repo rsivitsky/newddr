@@ -13,9 +13,11 @@
 <spring:message code="label.order_sum" var="order_sum"/>
 <spring:message code="label.cancel" var="order_cancel"/>
 <spring:message code="label.place_you_order" var="place_you_order"/>
+<spring:message code="label.place_all_you_order" var="place_all_you_order"/>
 
 <c:url var="cancelImgUrl" value="/resources/img/cancel.png"/>
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
+<c:url var="placeAllYourOrdersUrl" value="/order/place/all"/>
 <c:set var="status_new" scope="request" value="NEW"/>
 
 <div>
@@ -66,7 +68,9 @@
                     <td>
                         <c:if test="${!empty order_item.booking_status}">
                             <c:if test="${order_item.booking_status==status_new}">
-                                <a href="${placeYourOrderUrl}">${place_you_order}</a>
+                                <a href="${placeYourOrderUrl}"
+                                   class="btn btn-primary glyphicon glyphicon-shopping-cart"
+                                   role="button">${place_you_order}</a>
                             </c:if>
                         </c:if>
                     </td>
@@ -77,8 +81,13 @@
                 </tr>
             </c:forEach>
             <tr>
-                <td class="col-md-offset-1">
-                    place_all_your_orderes
+                <td class="col-md-8">
+
+                </td>
+                <td class="col-md-1">
+                    <a href="${placeAllYourOrdersUrl}"
+                       class="btn btn-primary glyphicon glyphicon-shopping-cart"
+                       role="button">${place_all_you_order}</a>
                 </td>
             </tr>
         </table>

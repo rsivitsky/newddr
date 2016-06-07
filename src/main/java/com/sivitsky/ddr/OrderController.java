@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @Controller
 @SessionAttributes({"order", "user"})
@@ -58,9 +59,18 @@ public class OrderController {
         return "order_edit";
     }
 
-    @RequestMapping("/order/place/${order_item.booking_id}")
-    public String placeOrder() {
+    @RequestMapping(value = "/order/place/${order_id}", method = RequestMethod.GET)
+    public String placeOrder(@PathVariable("order_id") Long booking_id, Principal principal) {
 
+        if (principal != null) {
+
+        }
+
+        return "redirect:/cart/info";
+    }
+
+    @RequestMapping("/order/place/all")
+    public String placeAllOrders() {
         return "redirect:/cart/info";
     }
 
