@@ -12,6 +12,8 @@
 <spring:message code="label.order_currency" var="order_currency"/>
 <spring:message code="label.order_sum" var="order_sum"/>
 <spring:message code="label.cancel" var="order_cancel"/>
+<spring:message code="label.cart" var="cart"/>
+
 <spring:message code="label.place_you_order" var="place_you_order"/>
 <spring:message code="label.place_all_you_order" var="place_all_you_order"/>
 
@@ -22,7 +24,7 @@
 
 <div>
     <form method="get" role="form">
-        <h3>Cart</h3>
+        <h3>${cart}</h3>
         <table class="table table-hover table-responsive">
             <tr>
                 <th class="col-md-1">

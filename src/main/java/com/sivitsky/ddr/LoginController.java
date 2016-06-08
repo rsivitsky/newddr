@@ -2,7 +2,7 @@ package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.ListRole;
 import com.sivitsky.ddr.model.User;
-import com.sivitsky.ddr.service.MailService;
+import com.sivitsky.ddr.service.IMailService;
 import com.sivitsky.ddr.service.RoleService;
 import com.sivitsky.ddr.service.UserService;
 import com.sivitsky.ddr.service.VendorService;
@@ -33,7 +33,7 @@ public class LoginController {
     @Autowired
     private VendorService vendorService;
     @Autowired
-    private MailService mailService;
+    private IMailService mailService;
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -46,8 +46,8 @@ public class LoginController {
     public String addUser(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("listRolesWithoutAdmin", roleService.getRolesWithoutAdmin());
-        //return "quick_registration";
-        return "registration";
+        return "quick_registration";
+        //return "registration";
     }
 
     @RequestMapping(value = "/registration/save", method = RequestMethod.POST)

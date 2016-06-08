@@ -3,10 +3,7 @@ package com.sivitsky.ddr;
 import com.sivitsky.ddr.model.Order;
 import com.sivitsky.ddr.model.OrderStatus;
 import com.sivitsky.ddr.model.User;
-import com.sivitsky.ddr.service.OfferService;
-import com.sivitsky.ddr.service.OrderService;
-import com.sivitsky.ddr.service.PartService;
-import com.sivitsky.ddr.service.UserService;
+import com.sivitsky.ddr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +26,8 @@ public class OrderController {
     private UserService userService;
     @Autowired
     private OfferService offerService;
+    @Autowired
+    private IMailService mailService;
 
     @RequestMapping("/order/list")
     public String orderList(Model model) {
@@ -60,12 +59,12 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/order/place/${order_id}", method = RequestMethod.GET)
-    public String placeOrder(@PathVariable("order_id") Long booking_id, Principal principal) {
-
+    public String placeOrder(@PathVariable("order_id") Long booking_id, Principal principal, User user) {
         if (principal != null) {
-
+            orderService.getOrderById(booking_id).setBooking_status(OrderStatus.ORDERED.toString());
+            this.mailService.sendMail("rsivitsky@gmail.com", user.getEmail(), "Your new order on http://pansivitsky.net",
+                    "Hi, " + user.getEmail() + ",\n you have ordered: " + orderService.getOrderById(booking_id).getPart());
         }
-
         return "redirect:/cart/info";
     }
 

@@ -3,7 +3,7 @@ package com.sivitsky.ddr.service;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
-public class MailService {
+public class MailService implements IMailService {
     private MailSender mailSender;
 
     public void setMailSender(MailSender mailSender) {
