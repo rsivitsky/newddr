@@ -18,26 +18,18 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <tiles:insertAttribute name="menu" ignore="true"/>
         </div>
         <div class="col-md-4">
             <tiles:insertAttribute name="header" ignore="true"/>
         </div>
-    </div>
-    <div class="row">
-        <tiles:insertAttribute name="cart_info" ignore="true"/>
-        <br>
+        <div class="col-md-1">
+            <tiles:insertAttribute name="cart_info" ignore="true"/>
+        </div>
     </div>
     <div class="row">
             <tiles:insertAttribute name="body" ignore="true"/>
-    </div>
-    <div class="row">
-        <div class="col-sm-10" align="center">
-            <sec:authorize access="isAuthenticated()">
-                <p>Ваш логин: <sec:authentication property="principal.username"/></p>
-            </sec:authorize>
-        </div>
     </div>
     <div class="row">
         <tiles:insertAttribute name="footer" ignore="true"/>

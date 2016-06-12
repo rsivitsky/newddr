@@ -49,7 +49,7 @@
         </div>
     </form>
 
-    <div>
+    <%--<div>
         <c:if test="${cartInfo!=null}">
             <div class="row">
                 <div class="col-md-6">
@@ -83,7 +83,7 @@
                 </div>
             </div>
         </c:if>
-    </div>
+    </div>--%>
 </div>
 <div class="col-md-9">
     <table class="table table-hover">

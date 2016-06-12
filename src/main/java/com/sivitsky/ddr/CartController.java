@@ -70,8 +70,6 @@ public class CartController {
     @RequestMapping(value = "/cart/info", method = RequestMethod.GET)
     public String cartInfoByUserId(Model model, User user, HttpServletRequest httpRequest) throws ParseException {
         HttpSession session = httpRequest.getSession(true);
-        int timeLive = 600; //ten minutes
-        session.setMaxInactiveInterval(timeLive);
         if (user.getUser_id() == null) {
             model.addAttribute("orderListByUser", orderService.getOrdersByUserId((User) session.getAttribute("anonym")));
         } else {

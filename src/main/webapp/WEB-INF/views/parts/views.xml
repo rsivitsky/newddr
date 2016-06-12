@@ -57,4 +57,7 @@
     <definition name="order_edit" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/order_edit.jsp"/>
     </definition>
+    <definition name="cart_info" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/cart_info.jsp"/>
+    </definition>
 </tiles-definitions>

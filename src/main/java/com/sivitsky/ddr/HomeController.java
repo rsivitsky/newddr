@@ -81,10 +81,8 @@ public class HomeController {
                             Cart cart, User user) {
 
         HttpSession session = httpRequest.getSession(true);
-        //int timeLive = 6; //ten minutes
-        //session.setMaxInactiveInterval(timeLive);
-        session.setAttribute("price_from", (price_from == null) ? 0 : Float.parseFloat(price_from));
-        session.setAttribute("price_to", (price_to == null) ? 0 : Float.parseFloat(price_to));
+        session.setAttribute("price_from", (price_from == null || price_from.equals("")) ? 0 : Float.parseFloat(price_from));
+        session.setAttribute("price_to", (price_to == null || price_to.equals("")) ? 0 : Float.parseFloat(price_to));
 
         Cart new_cart;
 
@@ -149,7 +147,7 @@ public class HomeController {
 
         Long[] l_array_manufacturs;
         int noOfRecords = 0;
-        List listPart = new ArrayList();
+        List listPart;
         if (array_manufacturs != null && array_manufacturs.length > 0 || Float.parseFloat(session.getAttribute("price_from").toString()) != 0 || Float.parseFloat(session.getAttribute("price_to").toString()) != 0) {
             if (array_manufacturs != null) {
                 l_array_manufacturs = new Long[array_manufacturs.length];

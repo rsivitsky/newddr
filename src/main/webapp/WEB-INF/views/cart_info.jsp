@@ -13,6 +13,7 @@
  --%>
 <div class="hero-unit">
     <c:set var="cartInfo" value="${cartInfo}"/>
+    <c:url var="cartInfoUrl" value="/cart/info"/>
     <%--  <sec:authorize access="isAuthenticated()"> --%>
     <c:if test="${cartInfo[0]!=0}">
         <div class="row">
@@ -25,10 +26,10 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <a href="<c:url value='/cart/info' />" title=${cart}>${cartInfo[0]}</a>
+                <a href="${cartInfoUrl}" title=${cart}>${cartInfo[0]}</a>
             </div>
             <div class="col-md-6">
-                <a href="<c:url value='/cart/info' />" title=${cart}>${cartInfo[1]}</a>
+                <a href="${cartInfoUrl}" title=${cart}>${cartInfo[1]}</a>
             </div>
         </div>
     </c:if>
