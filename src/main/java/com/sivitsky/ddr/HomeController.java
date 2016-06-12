@@ -81,8 +81,8 @@ public class HomeController {
                             Cart cart, User user) {
 
         HttpSession session = httpRequest.getSession(true);
-        int timeLive = 6; //ten minutes
-        session.setMaxInactiveInterval(timeLive);
+        //int timeLive = 6; //ten minutes
+        //session.setMaxInactiveInterval(timeLive);
         session.setAttribute("price_from", (price_from == null) ? 0 : Float.parseFloat(price_from));
         session.setAttribute("price_to", (price_to == null) ? 0 : Float.parseFloat(price_to));
 
