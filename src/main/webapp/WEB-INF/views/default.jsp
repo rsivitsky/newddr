@@ -21,10 +21,10 @@
         <div class="col-md-7">
             <tiles:insertAttribute name="menu" ignore="true"/>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <tiles:insertAttribute name="header" ignore="true"/>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-3">
             <tiles:insertAttribute name="cart_info" ignore="true"/>
         </div>
     </div>

@@ -121,6 +121,9 @@ public class HomeController {
             Object cartInfo = orderService.getOrderTotalByUserId(user);
             if (cartInfo != null) {
                 model.addAttribute("cartInfo", cartInfo);
+            } else {
+                int[] cartIsNull = {0, 0};
+                model.addAttribute("cartInfo", cartIsNull);
             }
 
         } else {
@@ -137,6 +140,9 @@ public class HomeController {
             Object cartInfo = orderService.getOrderTotalByUserId((User) session.getAttribute("anonym"));
             if (cartInfo != null) {
                 model.addAttribute("cartInfo", cartInfo);
+            } else {
+                int[] cartIsNull = {0, 0};
+                model.addAttribute("cartInfo", cartIsNull);
             }
         }
         setUsageAsFalse();

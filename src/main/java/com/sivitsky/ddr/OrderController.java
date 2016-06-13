@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
-@SessionAttributes({"order", "user"})
+@SessionAttributes({"order", "user", "cartInfo"})
 public class OrderController {
 
     @Autowired
@@ -33,9 +33,10 @@ public class OrderController {
     public String orderList(Model model) {
         model.addAttribute("order", new Order());
         model.addAttribute("orderList", orderService.listOrder());
-        model.addAttribute("listOffers", this.offerService.listOffer());
-        model.addAttribute("listUser", this.userService.listUsers());
-        model.addAttribute("listPart", this.partService.listPart());
+        model.addAttribute("listOffers", offerService.listOffer());
+        model.addAttribute("listUser", userService.listUsers());
+        model.addAttribute("listPart", partService.listPart());
+        // model.addAttribute("cartInfo", orderService.getOrderTotalByUserId(user));
         model.addAttribute("status", OrderStatus.values());
         return "order";
     }
