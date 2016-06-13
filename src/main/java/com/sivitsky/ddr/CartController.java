@@ -56,6 +56,12 @@ public class CartController {
         return "redirect:/index?price_from=" + session.getAttribute("price_from") + "&price_to=" + session.getAttribute("price_to");
     }
 
+    @RequestMapping("/cart/order/edit/{order_id}")
+    public String editOrder(@PathVariable("order_id") Long order_id, Model model) {
+        model.addAttribute("order", this.orderService.getOrderById(order_id));
+        return "order_edit";
+    }
+
     @RequestMapping(value = "/cart/order/save", method = RequestMethod.POST)
     public String addOrderPost(@ModelAttribute("order") Order order, BindingResult result) {
         if (!result.hasErrors()) {

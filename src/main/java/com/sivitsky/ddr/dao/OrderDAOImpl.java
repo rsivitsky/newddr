@@ -67,6 +67,13 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @SuppressWarnings("unchecked")
+    public List<Order> getNewOrdersByUserId(User user) {
+        return sessionFactory.getCurrentSession().getNamedQuery("Order.getOrdersByUserId")
+                .setParameter("user", user)
+                .list();
+    }
+
+    @SuppressWarnings("unchecked")
     public List<Order> getOrdersByCart(Cart cart) {
         return sessionFactory.getCurrentSession().getNamedQuery("Order.getOrdersByCart")
                 .setParameter("cart", cart)
@@ -80,8 +87,8 @@ public class OrderDAOImpl implements OrderDAO {
                 .list();
     }
 
-    public void cancelOrder(Long booking_id) {
-        sessionFactory.getCurrentSession().createQuery("update Order set booking_status = 'CANCELED'" +
-                " where booking_id = :booking_id").setParameter("booking_id", booking_id).executeUpdate();
+    public void changeOrderStatus(Long booking_id, String status) {
+        sessionFactory.getCurrentSession().createQuery("update Order set booking_status = :status" +
+                " where booking_id = :booking_id").setParameter("booking_id", booking_id).setParameter("status", status).executeUpdate();
     }
 }

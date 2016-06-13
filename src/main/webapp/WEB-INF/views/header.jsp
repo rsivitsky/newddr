@@ -83,6 +83,7 @@
         </ul>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
+        <br>
         <a href=${logoutUrl}>${logout}</a>
     </sec:authorize>
 </div>

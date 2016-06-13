@@ -21,6 +21,7 @@
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="placeAllYourOrdersUrl" value="/order/place/all"/>
 <c:set var="status_new" scope="request" value="NEW"/>
+<c:set var="having_new_order" scope="request" value="false"/>
 
 <div>
     <form method="get" role="form">
@@ -56,7 +57,7 @@
                 </th>
             </tr>
             <c:forEach items="${orderListByUser}" var="order_item">
-                <c:url var="editOrderUrl" value="/order/edit/${order_item.booking_id}"/>
+                <c:url var="editOrderUrl" value="/cart/order/edit/${order_item.booking_id}"/>
                 <c:url var="cancelOrderUrl" value="/order/cancel/${order_item.booking_id}"/>
                 <c:url var="placeYourOrderUrl" value="/order/place/${order_item.booking_id}"/>
                 <tr>
@@ -70,16 +71,19 @@
                     <td>
                         <c:if test="${!empty order_item.booking_status}">
                             <c:if test="${order_item.booking_status==status_new}">
+                                <c:set var="having_new_order" value="true"/>
                                 <a href="${placeYourOrderUrl}"
                                    class="btn btn-primary glyphicon glyphicon-shopping-cart"
                                    role="button">${place_you_order}</a>
                             </c:if>
                         </c:if>
                     </td>
-                    <td><a href="${editOrderUrl}"><img src="${editImgUrl}"/></a></td>
-                    <td><a href="${cancelOrderUrl}" title=${order_cancel}><img
-                            src="${cancelImgUrl}"/></a>
-                    </td>
+                    <c:if test="${order_item.booking_status==status_new}">
+                        <td><a href="${editOrderUrl}"><img src="${editImgUrl}"/></a></td>
+                        <td><a href="${cancelOrderUrl}" title=${order_cancel}><img
+                                src="${cancelImgUrl}"/></a>
+                        </td>
+                    </c:if>
                 </tr>
             </c:forEach>
             <tr>
@@ -87,12 +91,13 @@
 
                 </td>
                 <td class="col-md-1">
-                    <a href="${placeAllYourOrdersUrl}"
-                       class="btn btn-primary glyphicon glyphicon-shopping-cart"
-                       role="button">${place_all_you_order}</a>
+                    <c:if test="${having_new_order==true}">
+                        <a href="${placeAllYourOrdersUrl}"
+                           class="btn btn-primary glyphicon glyphicon-shopping-cart"
+                           role="button">${place_all_you_order}</a>
+                    </c:if>
                 </td>
             </tr>
         </table>
-
     </form>
 </div>

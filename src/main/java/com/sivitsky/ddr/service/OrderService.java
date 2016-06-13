@@ -20,10 +20,12 @@ public interface OrderService {
 
     List<Order> getOrdersByUserId(User user);
 
+    List<Order> getNewOrdersByUserId(User user);
+
     List<Order> getOrdersByCart(Cart cart);
 
     List<Order> getOrdersByVendorId(Long vendor_id);
 
-    void cancelOrder(Long booking_id);
+    void changeOrderStatus(Long booking_id, String status);
 
 }

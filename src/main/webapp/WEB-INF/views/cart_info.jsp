@@ -36,7 +36,6 @@
                 <div class="col-md-8" style="vertical-align: middle" align="left">
                     <br>
                     <a href="${cartInfoUrl}" title=${cart}>${quantity_of_orders}: ${cartInfo[0]}</a>
-
                 </div>
             </div>
         </c:if>

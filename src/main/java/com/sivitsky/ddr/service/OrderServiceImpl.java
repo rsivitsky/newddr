@@ -47,6 +47,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
+    public List<Order> getNewOrdersByUserId(User user) {
+        return this.orderDAO.getNewOrdersByUserId(user);
+    }
+
+    @Transactional
     public List<Order> getOrdersByCart(Cart cart) {
         return this.orderDAO.getOrdersByCart(cart);
     }
@@ -57,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
-    public void cancelOrder(Long booking_id) {
-        this.orderDAO.cancelOrder(booking_id);
+    public void changeOrderStatus(Long booking_id, String status) {
+        this.orderDAO.changeOrderStatus(booking_id, status);
     }
 }
