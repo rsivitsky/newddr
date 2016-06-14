@@ -18,7 +18,7 @@
 
 <spring:message code="label.user_firstname" var="user_firstname"/>
 <spring:message code="label.user_lastname" var="user_lastname"/>
-<spring:message code="label.user_login" var="user_login"/>
+<spring:message code="label.user_email" var="user_email"/>
 <spring:message code="label.user_password" var="user_password"/>
 <spring:message code="label.user_role" var="user_role"/>
 <spring:message code="label.user_vendor" var="user_vendor"/>
@@ -36,7 +36,7 @@
 			${user_lastname}
 		</th>
 		<th>
-			${user_login}
+				${user_email}
 		</th>
 		<th>
 			${user_password}
@@ -56,7 +56,7 @@
 			<form:input path="lastname" />
 		</td>
 		<td>
-			<form:input path="login" />
+			<form:input path="email"/>
 		</td>
 		<td>
 			<form:input path="password" />
@@ -101,6 +101,7 @@
 			<td>${useritem.user_id}</td>
 			<td>${useritem.firstname}</td>
 			<td>${useritem.lastname}</td>
+			<td>${useritem.email}</td>
 			<td>${useritem.role}</td>
 			<td><a href="<c:url value='/edit/${useritem.user_id}' />" title=${edit}><img src="${editImgUrl}"/></a>
 			<td><a href="<c:url value='/remove/${useritem.user_id}' />" title=${delete}><img

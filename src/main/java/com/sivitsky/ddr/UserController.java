@@ -56,17 +56,19 @@ public class UserController {
 
     @RequestMapping("/remove/{user_id}")
     public String removeUser(@PathVariable("user_id") Long id, Principal principal) {
-        User user;
-        user = userService.getUserByEmail(principal.getName());
-        if (!user.getUser_id().equals(id)) {
-            List<Order> listOrders = orderService.getOrdersByUserId(user);
+        User currentUser;
+        currentUser = userService.getUserByEmail(principal.getName());
+        if (!currentUser.getUser_id().equals(id)) {
+            User userForDel = userService.getUserById(id);
+            List<Order> listOrders = orderService.getOrdersByUserId(userForDel);
             if (listOrders != null) {
                 for (Order order : listOrders) {
                     orderService.removeOrder(order.getBooking_id());
                 }
             }
-            cartService.removeCart(cartService.getCartByUser(user));
-            // userRepository.delete(id);
+            cartService.removeCart(cartService.getCartByUser(userForDel));
+            userService.removeUser(userForDel);
+            //userRepository.delete(id);
         }
         return "redirect:/user";
     }
