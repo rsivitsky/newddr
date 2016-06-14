@@ -13,6 +13,7 @@
 <spring:message code="label.order_sum" var="order_sum"/>
 <spring:message code="label.cancel" var="order_cancel"/>
 <spring:message code="label.cart" var="cart"/>
+<spring:message code="label.you_need_login" var="you_need_login"/>
 
 <spring:message code="label.place_you_order" var="place_you_order"/>
 <spring:message code="label.place_all_you_order" var="place_all_you_order"/>
@@ -24,6 +25,13 @@
 <c:set var="having_new_order" scope="request" value="false"/>
 
 <div>
+    <c:if test="${sessionScope.anonym!=null}">
+        <div class="row">
+            <div class="col-md-12" align="center" style="font-size: medium; background-color: #edffa8; color: #4547ff">
+                    ${you_need_login}
+            </div>
+        </div>
+    </c:if>
     <form method="get" role="form">
         <h3>${cart}</h3>
         <table class="table table-hover table-responsive">

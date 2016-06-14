@@ -1,16 +1,18 @@
 package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.ListRole;
+import com.sivitsky.ddr.model.Order;
 import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.repository.UserRepository;
-import com.sivitsky.ddr.service.RoleService;
-import com.sivitsky.ddr.service.UserService;
-import com.sivitsky.ddr.service.VendorService;
+import com.sivitsky.ddr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.List;
 
 @Controller
 @SessionAttributes({"user"})
@@ -27,6 +29,12 @@ public class UserController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private CartService cartService;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String startPage(Model model) {
@@ -47,8 +55,19 @@ public class UserController {
     }
 
     @RequestMapping("/remove/{user_id}")
-    public String removeUser(@PathVariable("user_id") Long id) {
-        userRepository.delete(id);
+    public String removeUser(@PathVariable("user_id") Long id, Principal principal) {
+        User user;
+        user = userService.getUserByEmail(principal.getName());
+        if (!user.getUser_id().equals(id)) {
+            List<Order> listOrders = orderService.getOrdersByUserId(user);
+            if (listOrders != null) {
+                for (Order order : listOrders) {
+                    orderService.removeOrder(order.getBooking_id());
+                }
+            }
+            cartService.removeCart(cartService.getCartByUser(user));
+            // userRepository.delete(id);
+        }
         return "redirect:/user";
     }
 

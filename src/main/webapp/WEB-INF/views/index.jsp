@@ -48,42 +48,6 @@
             </div>
         </div>
     </form>
-
-    <%--<div>
-        <c:if test="${cartInfo!=null}">
-            <div class="row">
-                <div class="col-md-6">
-                    <span class="label label-primary">${cart_num}</span>
-                </div>
-                <div class="col-md-6">
-                    <span class="label label-primary">${cart_sum}</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <span class="label label-primary">"${cartInfo[0]}"</span>
-                </div>
-                <div class="col-md-6">
-                    <span class="label label-primary">${cartInfo[1]}</span>
-                </div>
-            </div>
-        </c:if>
-        <c:if test="${cartInfo==null}">
-            <div class="row">
-                <div class="col-md-6">
-                    <span class="label label-primary">${cart_num}</span>
-                </div>
-                <div class="col-md-6">
-                    <span class="label label-primary">${cart_sum}</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    empty cart
-                </div>
-            </div>
-        </c:if>
-    </div>--%>
 </div>
 <div class="col-md-9">
     <table class="table table-hover">
