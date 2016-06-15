@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -69,7 +70,7 @@ public class OrderController {
         if (principal != null) {
             orderService.changeOrderStatus(booking_id, OrderStatus.ORDERED.toString());
             this.mailService.sendMail("rsivitsky@gmail.com", user.getEmail(), "Your new order on http://pansivitsky.net",
-                    "Hi, " + user.getEmail() + ",\n you have ordered: " + orderService.getOrderById(booking_id).getPart());
+                    "Hi, " + user.getEmail() + ",\n you have ordered: " + orderService.getOrderById(booking_id).getPart().getPart_name());
             Object cartInfo = orderService.getOrderTotalByUserId(user);
             if (cartInfo != null) {
                 model.addAttribute("cartInfo", cartInfo);
@@ -88,11 +89,15 @@ public class OrderController {
                 user = userService.getUserByEmail(principal.getName());
             }
             List<Order> listOrders = orderService.getNewOrdersByUserId(user);
+            List<String> listPartNames = new ArrayList();
             if (listOrders != null) {
                 for (Order order : listOrders) {
                     orderService.changeOrderStatus(order.getBooking_id(), OrderStatus.ORDERED.toString());
+                    listPartNames.add(order.getPart().getPart_name());
                 }
             }
+            this.mailService.sendMail("rsivitsky@gmail.com", user.getEmail(), "Your new order on http://pansivitsky.net",
+                    "Hi, " + user.getEmail() + ",\n you have ordered: " + listPartNames.toString());
             Object cartInfo = orderService.getOrderTotalByUserId(user);
             if (cartInfo != null) {
                 model.addAttribute("cartInfo", cartInfo);
