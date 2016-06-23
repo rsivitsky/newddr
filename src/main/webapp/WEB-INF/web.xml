@@ -1,63 +1,80 @@
+<!--suppress ALL, XmlUnboundNsPrefix, XmlUnboundNsPrefix, XmlUnboundNsPrefix -->
 <web-app>
 
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
-	</context-param>
+    <context-param>
+        <description>
+            The list of the xml files that describes spring context configuration.
+        </description>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath*:spring/core/*.xml
+        </param-value>
+    </context-param>
 
-	<!-- Creates the Spring Container shared by all Servlets and Filters -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
 
-	<!-- Processes application requests -->
-	<servlet>
-		<servlet-name>appServlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-		<multipart-config>
-			<max-file-size>5000000</max-file-size>
-		</multipart-config>
-	</servlet>
+    <session-config>
+        <session-timeout>10</session-timeout>
+    </session-config>
+    <!-- Creates the Spring Container shared by all Servlets and Filters -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!--Support the scoping of beans at the request, session, and global session levels (web-scoped beans) -->
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
 
-	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
+    <!--for destroy session processing (08/06/2016) -->
+    <listener>
+        <listener-class>com.sivitsky.ddr.service.HttpSessListener</listener-class>
+    </listener>
 
-	<!-- begin Spring Security -->
-	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
-		</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<!-- end Spring Security -->
+    <!-- Processes application requests -->
+    <servlet>
+        <servlet-name>appServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:spring/appServlet/*.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <multipart-config>
+            <max-file-size>5000000</max-file-size>
+        </multipart-config>
+    </servlet>
 
-	<!-- Фильтр для перекодировки в utf8 -->
-	<filter>
-		<filter-name>charsetFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>charsetFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
+    <!-- begin Spring Security -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- end Spring Security -->
+
+    <!-- Фильтр для перекодировки в utf8 -->
+    <filter>
+        <filter-name>charsetFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>charsetFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
