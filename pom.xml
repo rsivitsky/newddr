@@ -269,6 +269,14 @@
             <version>5.0.6</version>
         </dependency>
 
+        <!--begin using sparkpost -->
+        <dependency>
+            <groupId>com.sparkpost</groupId>
+            <artifactId>sparkpost-lib</artifactId>
+            <version>0.16.1</version>
+        </dependency>
+        <!--end using sparkpost -->
+
     </dependencies>
 
     <build>

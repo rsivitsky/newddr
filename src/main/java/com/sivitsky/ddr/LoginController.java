@@ -6,6 +6,7 @@ import com.sivitsky.ddr.service.IMailService;
 import com.sivitsky.ddr.service.RoleService;
 import com.sivitsky.ddr.service.UserService;
 import com.sivitsky.ddr.service.VendorService;
+import com.sparkpost.exception.SparkPostException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -51,7 +52,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration/save", method = RequestMethod.POST)
-    public String saveUser(@Valid User user, BindingResult result, HttpServletRequest request) {
+    public String saveUser(@Valid User user, BindingResult result, HttpServletRequest request) throws SparkPostException {
 
         if (result.hasErrors()) {
             return "quick_registration";
@@ -64,8 +65,11 @@ public class LoginController {
             user.setRole(ListRole.ROLE_USER.toString());
         }
         this.userService.saveUser(user);
+        /*
         this.mailService.sendMail("rsivitsky@gmail.com", user.getEmail(), "registration on http://pansivitsky.net",
-                "Hi, " + user.getEmail() + ",\n your login is: " + user.getEmail() + " \n and your password is: " + user.getPassword());
+                "Hi, " + user.getEmail() + ",\n your login is: " + user.getEmail() + " \n and your password is: " + user.getPassword());*/
+        this.mailService.sendMailWithSparkPost("rsivitsky@gmail.com", user.getEmail(), "registration on http://pansivitsky.net",
+                "Hi, " + user.getEmail() + ",\n your login is: " + user.getEmail() + " \n and your password is: " + user.getPassword(), "<b>The HTML part of the email</b>");
         autoLogin(user.getEmail(), user.getPassword(), request);
         request.getSession().setAttribute("user_id", user.getUser_id());
         return "redirect:/index";

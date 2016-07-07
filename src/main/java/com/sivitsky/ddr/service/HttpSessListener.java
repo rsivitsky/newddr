@@ -26,10 +26,8 @@ public class HttpSessListener implements HttpSessionListener {
     public void sessionDestroyed(HttpSessionEvent e) {
         User userForDelete = (User) e.getSession().getAttribute("anonym");
         List<Order> listOrder = orderService.getOrdersByUserId(userForDelete);
-        if (listOrder.size() > 0) {
-            for (int i = 0; i < listOrder.size(); i++) {
-                orderService.removeOrder(listOrder.get(i).getBooking_id());
-            }
+        for (Order aListOrder : listOrder) {
+            orderService.removeOrder(aListOrder.getBooking_id());
         }
         cartService.removeCart(cartService.getCartByUser(userForDelete));
         userService.removeUser(userForDelete);
