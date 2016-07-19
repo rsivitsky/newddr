@@ -34,7 +34,6 @@
                 <prop key="mail.smtp.ssl.trust">*</prop>
             </props>
         </property>
-
     </bean>
 
     <bean id="mailService" class="com.sivitsky.ddr.service.MailService">

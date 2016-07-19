@@ -35,5 +35,4 @@ public class MailService implements IMailService {
                 msg,
                 "<b>The HTML part of the email</b>");
     }
-
 }
