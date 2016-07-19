@@ -23,16 +23,17 @@ public class MailService implements IMailService {
     }
 
     public void sendMailWithSparkPost(String from, String to, String subject, String msg, String head) throws SparkPostException {
-        String API_KEY = "7bf604c2cd06a15d5620543a5fc59147c3c9d9cd";
+        //String API_KEY = "7bf604c2cd06a15d5620543a5fc59147c3c9d9cd";
+        String API_KEY = "0b04efb4cf55eaf3ee8b343dfb13e0662b0e774b";
         Client client = new Client(API_KEY);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(msg);
-        client.sendMessage("sandbox@sparkpostbox.com", "to@sparkpost.com",
-                "The subject of the message",
-                "The text part of the email",
+        client.sendMessage(from, to,
+                subject,
+                msg,
                 "<b>The HTML part of the email</b>");
 
     }
