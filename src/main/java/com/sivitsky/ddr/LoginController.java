@@ -48,7 +48,6 @@ public class LoginController {
         model.addAttribute("user", new User());
         model.addAttribute("listRolesWithoutAdmin", roleService.getRolesWithoutAdmin());
         return "quick_registration";
-        //return "registration";
     }
 
     @RequestMapping(value = "/registration/save", method = RequestMethod.POST)
@@ -65,11 +64,11 @@ public class LoginController {
             user.setRole(ListRole.ROLE_USER.toString());
         }
         this.userService.saveUser(user);
-
         /*this.mailService.sendMail("rsivitsky@gmail.com", user.getEmail(), "registration on http://pansivitsky.net",
                 "Hi, " + user.getEmail() + ",\n your login is: " + user.getEmail() + " \n and your password is: " + user.getPassword());*/
-        this.mailService.sendMailWithSparkPost("rsivitsky@gmail.com", user.getEmail(), "registration on http://pansivitsky.net",
-                "Hi, " + user.getEmail() + ",\n your login is: " + user.getEmail() + " \n and your password is: " + user.getPassword(), "<b>The HTML part of the email</b>");
+        String message = "Hi, " + user.getEmail() + ",\n your login is: " + user.getEmail() + " \n and your password is: " + user.getPassword();
+        this.mailService.sendMailWithSparkPost("sandbox@sparkpostbox.com", user.getEmail(), "registration on http://pansivitsky.net",
+                "Hi, " + user.getEmail() + ",\n your login is: " + user.getEmail() + " \n and your password is: " + user.getPassword(), message);
         autoLogin(user.getEmail(), user.getPassword(), request);
         request.getSession().setAttribute("user_id", user.getUser_id());
         return "redirect:/index";

@@ -33,6 +33,6 @@ public class MailService implements IMailService {
         client.sendMessage(from, to,
                 subject,
                 msg,
-                "<b>The HTML part of the email</b>");
+                head);
     }
 }
