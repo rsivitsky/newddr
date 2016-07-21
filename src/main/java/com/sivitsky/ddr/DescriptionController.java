@@ -43,7 +43,7 @@ public class DescriptionController {
     public String addDescriptionGet(@PathVariable("part_id") Long part_id, Model model) {
         descriptionList = new ArrayList<Description>();
         descriptionList = descriptionService.listDescriptionByPartId(part_id);
-        if (descriptionList != null) {
+        if (descriptionList.size() != 0) {
         } else {
             for (Specification specification : specificationService.listSpecification()) {
                 Description description = new Description();
