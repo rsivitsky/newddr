@@ -23,6 +23,10 @@
     <resources location="/resources/" mapping="/resources/**"/>
     <default-servlet-handler/>
 
+    <beans:bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+        <beans:property name="basename" value="views"/>
+    </beans:bean>
+
     <!--internationalisation (i18n) support-->
     <beans:bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
                 id="messageSource"
@@ -71,6 +75,7 @@
             class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
             p:paramName="lang"/>
     </interceptors>-->
+
 
     <!--configuration Apache Tiles-->
     <beans:bean

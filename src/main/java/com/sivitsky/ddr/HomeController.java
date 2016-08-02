@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -198,5 +199,13 @@ public class HomeController {
     public byte[] downloadPhoto(@PathVariable("part_id") Long part_id) {
         Part part = partService.getPartById(part_id);
         return part.getPhoto();
+    }
+
+    @RequestMapping(value = "/downloadPDF", method = RequestMethod.GET)
+    public ModelAndView downloadExcel() {
+        // create some sample data
+
+        // return a view which will be resolved by an excel view resolver
+        return new ModelAndView("pdfView");
     }
 }
