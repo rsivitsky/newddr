@@ -25,10 +25,6 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <intercept-url pattern="/offers" access="hasAnyRole('ROLE_ADMIN','ROLE_VENDOR')"/>
         <intercept-url pattern="/cart/add" access="permitAll"/>
         <intercept-url pattern="/cart/add/*" access="permitAll"/>
-
-        <intercept-url pattern="/order/print" access="permitAll"/>
-        <intercept-url pattern="/order/print/*" access="permitAll"/>
-
         <intercept-url pattern="/order/edit" access="permitAll"/>
         <intercept-url pattern="/order/edit/*" access="permitAll"/>
         <intercept-url pattern="/cart/info" access="permitAll"/>
