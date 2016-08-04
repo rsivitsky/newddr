@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -107,6 +108,11 @@ public class OrderController {
             }
         }
         return "redirect:/cart/info";
+    }
+
+    @RequestMapping(value = "/order/print_pdf/{order_id}", method = RequestMethod.GET)
+    public ModelAndView printPdfOrder(@PathVariable("order_id") Long booking_id) {
+        return new ModelAndView("pdfView");
     }
 
     @RequestMapping(value = "/order/cancel/{order_id}", method = RequestMethod.GET)
