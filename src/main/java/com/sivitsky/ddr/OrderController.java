@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@SessionAttributes({"order", "user", "cartInfo"})
+@SessionAttributes({"order", "user", "cartInfo", "booking"})
 public class OrderController {
 
     @Autowired
@@ -111,7 +111,9 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/order/print_pdf/{order_id}", method = RequestMethod.GET)
-    public ModelAndView printPdfOrder(@PathVariable("order_id") Long booking_id) {
+    public ModelAndView printPdfOrder(@PathVariable("order_id") Long booking_id, HttpServletRequest httpRequest) {
+        HttpSession session = httpRequest.getSession(true);
+        session.setAttribute("booking", orderService.getOrderById(booking_id));
         return new ModelAndView("pdfView");
     }
 

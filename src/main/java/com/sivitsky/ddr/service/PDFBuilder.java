@@ -4,9 +4,11 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.sivitsky.ddr.model.Order;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 
@@ -18,8 +20,10 @@ public class PDFBuilder extends AbstractITextPdfView {
             throws Exception {
         // get data model which is passed by the Spring container
         // List<Book> listBooks = (List<Book>) model.get("listBooks");
+        HttpSession session = request.getSession(true);
 
-        doc.add(new Paragraph("Order #"));
+        Order order = (Order) session.getAttribute("booking");
+        doc.add(new Paragraph("Order #" + order.getBooking_id() + " from " + order.getBooking_date()));
 
         PdfPTable table = new PdfPTable(5);
         table.setWidthPercentage(100.0f);
