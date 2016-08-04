@@ -13,15 +13,19 @@
 <spring:message code="label.order_sum" var="order_sum"/>
 <spring:message code="label.cancel" var="order_cancel"/>
 <spring:message code="label.cart" var="cart"/>
+<spring:message code="label.cart" var="cart"/>
 <spring:message code="label.you_need_login" var="you_need_login"/>
 
 <spring:message code="label.place_you_order" var="place_you_order"/>
 <spring:message code="label.place_all_you_order" var="place_all_you_order"/>
+<spring:message code="label.print_you_order" var="print_you_order"/>
 
 <c:url var="cancelImgUrl" value="/resources/img/cancel.png"/>
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="placeAllYourOrdersUrl" value="/order/place/all"/>
 <c:set var="status_new" scope="request" value="NEW"/>
+<c:set var="status_ordered" scope="request" value="ORDERED"/>
+<c:set var="status_paid" scope="request" value="PAID"/>
 <c:set var="having_new_order" scope="request" value="false"/>
 
 <div>
@@ -68,6 +72,7 @@
                 <c:url var="editOrderUrl" value="/cart/order/edit/${order_item.booking_id}"/>
                 <c:url var="cancelOrderUrl" value="/order/cancel/${order_item.booking_id}"/>
                 <c:url var="placeYourOrderUrl" value="/order/place/${order_item.booking_id}"/>
+                <c:url var="printOrderInPdfUrl" value="/order/print_pdf/${order_item.booking_id}"/>
                 <tr>
                     <td><fmt:formatDate pattern="dd-MM-yyyy"
                                         value="${order_item.booking_date}"/></td>
@@ -83,6 +88,11 @@
                                 <a href="${placeYourOrderUrl}"
                                    class="btn btn-primary glyphicon glyphicon-shopping-cart"
                                    role="button">${place_you_order}</a>
+                            </c:if>
+                            <c:if test="${order_item.booking_status==status_ordered || order_item.booking_status==status_ordered}">
+                                <a href="${printOrderInPdfUrl}"
+                                   class="btn btn-primary glyphicon glyphicon-print"
+                                   role="button">${print_you_order}</a>
                             </c:if>
                         </c:if>
                     </td>
