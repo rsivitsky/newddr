@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@SessionAttributes({"order", "user", "cartInfo", "booking"})
+@SessionAttributes({"order", "user", "cartInfo"})
 public class OrderController {
 
     @Autowired
@@ -111,10 +111,18 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/order/print_pdf/{order_id}", method = RequestMethod.GET)
-    public ModelAndView printPdfOrder(@PathVariable("order_id") Long booking_id, HttpServletRequest httpRequest) {
-        HttpSession session = httpRequest.getSession(true);
-        session.setAttribute("booking", orderService.getOrderById(booking_id));
-        return new ModelAndView("pdfView");
+    public ModelAndView printPdfOrder(@PathVariable("order_id") Long booking_id) {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("pdfView");
+        model.addObject("orderPdf", orderService.getOrderById(booking_id));
+        return model;
+    }
+
+    @RequestMapping("/order/print/all")
+    public ModelAndView printPdfAllOrders(@PathVariable("order_id") Long booking_id, HttpServletRequest httpRequest) {
+        //HttpSession session = httpRequest.getSession(true);
+        //session.setAttribute("booking", orderService.getOrderById(booking_id));
+        return new ModelAndView("pdfView", "orderPdf", orderService.getOrderById(booking_id));
     }
 
     @RequestMapping(value = "/order/cancel/{order_id}", method = RequestMethod.GET)

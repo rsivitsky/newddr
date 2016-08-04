@@ -23,6 +23,7 @@
 <c:url var="cancelImgUrl" value="/resources/img/cancel.png"/>
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="placeAllYourOrdersUrl" value="/order/place/all"/>
+<c:url var="printAllYourOrdersUrl" value="/order/print/all"/>
 <c:set var="status_new" scope="request" value="NEW"/>
 <c:set var="status_ordered" scope="request" value="ORDERED"/>
 <c:set var="status_paid" scope="request" value="PAID"/>
@@ -113,6 +114,9 @@
                         <a href="${placeAllYourOrdersUrl}"
                            class="btn btn-primary glyphicon glyphicon-shopping-cart"
                            role="button">${place_all_you_order}</a>
+                        <a href="${printAllYourOrdersUrl}"
+                           class="btn btn-primary glyphicon glyphicon-print"
+                           role="button">${print_all_you_order}</a>
                     </c:if>
                 </td>
             </tr>

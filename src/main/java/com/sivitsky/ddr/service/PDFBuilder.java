@@ -1,14 +1,13 @@
 package com.sivitsky.ddr.service;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.sivitsky.ddr.model.Order;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 
@@ -20,11 +19,19 @@ public class PDFBuilder extends AbstractITextPdfView {
             throws Exception {
         // get data model which is passed by the Spring container
         // List<Book> listBooks = (List<Book>) model.get("listBooks");
-        HttpSession session = request.getSession(true);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        // HttpSession session = request.getSession(true);
 
-        Order order = (Order) session.getAttribute("booking");
-        doc.add(new Paragraph("Order #" + order.getBooking_id() + " from " + order.getBooking_date()));
+        //Order order = (Order) session.getAttribute("booking");
+        Order order = (Order) model.get("orderPdf");
+        doc.add(new Paragraph("Order #" + order.getBooking_id() + " from " + dateFormat.format(order.getBooking_date())));
 
+
+        doc.add(new Paragraph("goods: " + order.getPart().getPart_name()));
+        doc.add(new Paragraph("quantity: " + order.getBooking_num()));
+        doc.add(new Paragraph("cost: " + order.getBooking_sum()));
+
+        /*
         PdfPTable table = new PdfPTable(5);
         table.setWidthPercentage(100.0f);
         table.setWidths(new float[]{3.0f, 2.0f, 2.0f, 2.0f, 1.0f});
@@ -65,7 +72,7 @@ public class PDFBuilder extends AbstractITextPdfView {
             table.addCell(String.valueOf(aBook.getPrice()));
         }
         */
-        doc.add(table);
+        //doc.add(table);
 
     }
 
