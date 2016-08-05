@@ -1,0 +1,4 @@
+db:
+  build: .
+  dockerfile: dockerfiles/offers-db.dockerfile
+

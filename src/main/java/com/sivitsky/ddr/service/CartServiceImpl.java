@@ -3,6 +3,7 @@ package com.sivitsky.ddr.service;
 import com.sivitsky.ddr.dao.CartDAO;
 import com.sivitsky.ddr.model.Cart;
 import com.sivitsky.ddr.model.User;
+import com.sivitsky.ddr.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,9 @@ public class CartServiceImpl implements CartService {
 
     @Autowired
     private CartDAO cartDAO;
+
+    @Autowired
+    private CartRepository cartRepository;
 
     @Transactional
     public Cart saveCart(Cart cart) {
@@ -25,13 +29,11 @@ public class CartServiceImpl implements CartService {
 
     @Transactional
     public void removeCart(Cart cart) {
-        if (cart != null) {
-            cartDAO.removeCart(cart);
-        }
+        cartRepository.delete(cart);
     }
 
     @Transactional
     public Cart getCartByUser(User user) {
-        return cartDAO.getCartByUser(user);
+        return cartRepository.findByUser(user);
     }
 }

@@ -1,0 +1,20 @@
+#### MySQL database
+#
+db:
+  extends:
+    file: common.yml
+    service: db
+  env_file:
+    - ./mysql.env
+  ports:
+    - 3307:3306
+  volumes_from:
+    - data
+
+#### Data container
+#
+data:
+  image: busybox:ubuntu-14.04
+  command: /bin/sh
+  volumes:
+    - /srv/docker-data/offers/db:/var/lib/mysql
