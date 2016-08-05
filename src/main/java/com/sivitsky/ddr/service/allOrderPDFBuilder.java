@@ -69,7 +69,7 @@ public class allOrderPDFBuilder extends AbstractITextPdfView {
                 table.addCell(order.getOffer().getOffer_price().toString());
                 table.addCell(order.getBooking_num().toString());
                 table.addCell(order.getBooking_sum().toString());
-                table.addCell(order.getBooking_status());
+                //table.addCell(order.getBooking_status());
             }
             doc.add(table);
         } else {
