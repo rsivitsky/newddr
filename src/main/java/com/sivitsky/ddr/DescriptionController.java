@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,12 +19,12 @@ public class DescriptionController {
 
     @Autowired
     private DescriptionService descriptionService;
+
     @Autowired
     private PartService partService;
+
     @Autowired
     private SpecificationService specificationService;
-
-    private List<Description> descriptionList;
 
     @RequestMapping("/part/description")
     public Model startDescription(Model model) {
@@ -41,10 +40,8 @@ public class DescriptionController {
 
     @RequestMapping(value = "/part/descript/edit/{part_id}", method = RequestMethod.GET)
     public String addDescriptionGet(@PathVariable("part_id") Long part_id, Model model) {
-        descriptionList = new ArrayList<Description>();
-        descriptionList = descriptionService.listDescriptionByPartId(part_id);
-        if (descriptionList.size() != 0) {
-        } else {
+        List<Description> descriptionList = descriptionService.listDescriptionByPartId(part_id);
+        if (descriptionList.isEmpty()) {
             for (Specification specification : specificationService.listSpecification()) {
                 Description description = new Description();
                 description.setPart(partService.getPartById(part_id));

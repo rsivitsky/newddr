@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CartServiceImpl implements CartService {
 
     @Autowired
-    CartDAO cartDAO;
+    private CartDAO cartDAO;
 
     @Transactional
     public Cart saveCart(Cart cart) {

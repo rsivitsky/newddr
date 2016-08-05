@@ -20,14 +20,16 @@ public class OfferController {
 
     @Autowired
     private OfferService offerService;
+
     @Autowired
     private PartService partService;
+
     @Autowired
     private VendorService vendorService;
+
     @Autowired
     private ExcelReaderService excelReaderService;
-    @Autowired
-    private UserService userService;
+
     @Autowired
     private CurrencyService currencyService;
 

@@ -24,7 +24,7 @@ public class ManufacturController {
 
     @RequestMapping(value = "/manufactur/add", method = RequestMethod.POST)
     public String addManufactur(@ModelAttribute("manufactur") Manufactur manufactur, BindingResult result) {
-        manufactur = this.manufacturService.saveManufactur(manufactur);
+        manufacturService.saveManufactur(manufactur);
         return "redirect:/manufactur";
     }
 

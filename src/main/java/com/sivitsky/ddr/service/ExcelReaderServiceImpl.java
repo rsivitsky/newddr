@@ -24,6 +24,7 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
 
     @Autowired
     private OfferService offerService;
+
     @Autowired
     private PartService partService;
 
@@ -95,7 +96,7 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
     }
 
     public Workbook getWorkbook(FileInputStream inputStream, String excelFilePath) throws IOException {
-        Workbook workbook = null;
+        Workbook workbook;
         if (excelFilePath.endsWith("xlsx")) {
             workbook = new XSSFWorkbook(inputStream);
         } else if (excelFilePath.endsWith("xls")) {

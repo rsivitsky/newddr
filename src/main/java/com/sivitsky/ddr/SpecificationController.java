@@ -30,7 +30,7 @@ public class SpecificationController {
     //For add and update person both
     @RequestMapping(value = "/specification/add", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("specification") Specification specification, BindingResult result) {
-        specification = this.specificationService.saveSpecification(specification);
+        specificationService.saveSpecification(specification);
         return "redirect:/specification";
     }
 

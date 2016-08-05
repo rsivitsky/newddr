@@ -31,7 +31,7 @@ public class Specification implements Serializable {
         this.spec_name = spec_name;
     }
 
-    @ManyToOne(targetEntity=Measure.class, fetch=FetchType.EAGER)
+    @ManyToOne(targetEntity = Measure.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "measure_id")
     public Measure getMeasure() {
         return measure;

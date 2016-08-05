@@ -15,14 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 
-public class allOrderPDFBuilder extends AbstractITextPdfView {
+public class AllOrderPDFBuilder extends AbstractITextPdfView {
 
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document doc,
                                     PdfWriter writer, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        List<Order> orderList = new ArrayList<Order>();
+        List<Order> orderList = new ArrayList<>();
         try {
             orderList = (List<Order>) model.get("listOrders");
         } catch (Exception e) {

@@ -4,7 +4,6 @@ import com.sivitsky.ddr.model.Cart;
 import com.sivitsky.ddr.model.Offer;
 import com.sivitsky.ddr.model.Order;
 import com.sivitsky.ddr.model.User;
-import com.sivitsky.ddr.repository.CartRepository;
 import com.sivitsky.ddr.service.OfferService;
 import com.sivitsky.ddr.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +21,12 @@ import java.util.Date;
 @Controller
 @SessionAttributes({"cart", "user", "part", "order", "cartInfo"})
 public class CartController {
-    private OrderService orderService;
-    private OfferService offerService;
 
     @Autowired
-    private CartRepository cartRepository;
+    private OrderService orderService;
 
-    @Autowired(required = true)
-    public void setOfferService(OfferService offerService) {
-        this.offerService = offerService;
-    }
-
-    @Autowired(required = true)
-    public void setOrderService(OrderService orderService) {
-        this.orderService = orderService;
-    }
+    @Autowired
+    private OfferService offerService;
 
     @RequestMapping(value = "/cart/add/{offer_id}", method = RequestMethod.GET)
     public String addToCart(@PathVariable("offer_id") Long offer_id, Cart cart, HttpServletRequest httpRequest) throws ParseException {

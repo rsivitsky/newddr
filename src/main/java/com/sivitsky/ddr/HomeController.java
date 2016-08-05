@@ -20,15 +20,17 @@ import java.util.Random;
 public class HomeController {
 
     @Autowired
-    private ManufacturService manufacturService;
-    @Autowired
     private OfferService offerService;
+
     @Autowired
     private PartService partService;
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private OrderService orderService;
+
     @Autowired
     private CartService cartService;
 
@@ -53,7 +55,7 @@ public class HomeController {
         }
     }
 
-    @Autowired(required = true)
+    @Autowired
     public void setManufacturService(ManufacturService manufacturService) {
         if (manufacturService.listManufactur().size() > 0) {
             for (Manufactur manufactur : manufacturService.listManufactur()) {
