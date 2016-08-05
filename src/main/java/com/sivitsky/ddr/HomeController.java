@@ -37,7 +37,7 @@ public class HomeController {
     @Autowired
     private UserRepository userRepository;
 
-    private List<ManufacturFilterService> manufacturFilterList = new ArrayList<ManufacturFilterService>();
+    private List<ManufacturFilterService> manufacturFilterList = new ArrayList<>();
 
     void setUsageAsFalse() {
         for (ManufacturFilterService manufacturFilter : manufacturFilterList) {
