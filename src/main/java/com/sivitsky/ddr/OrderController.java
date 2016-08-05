@@ -113,16 +113,20 @@ public class OrderController {
     @RequestMapping(value = "/order/print_pdf/{order_id}", method = RequestMethod.GET)
     public ModelAndView printPdfOrder(@PathVariable("order_id") Long booking_id) {
         ModelAndView model = new ModelAndView();
-        model.setViewName("pdfView");
+        model.setViewName("orderPdfView");
         model.addObject("orderPdf", orderService.getOrderById(booking_id));
         return model;
     }
 
     @RequestMapping("/order/print/all")
-    public ModelAndView printPdfAllOrders(@PathVariable("order_id") Long booking_id, HttpServletRequest httpRequest) {
-        //HttpSession session = httpRequest.getSession(true);
-        //session.setAttribute("booking", orderService.getOrderById(booking_id));
-        return new ModelAndView("pdfView", "orderPdf", orderService.getOrderById(booking_id));
+    public ModelAndView printPdfAllOrders(User user) {
+        List<Order> orderList = orderService.getOrdersByUserId(user);
+        ModelAndView model = new ModelAndView();
+        model.setViewName("allOrderPdfView");
+        if (orderList.size() > 0) {
+            model.addObject("listOrders", orderService.getOrdersByUserId(user));
+        }
+        return model;
     }
 
     @RequestMapping(value = "/order/cancel/{order_id}", method = RequestMethod.GET)

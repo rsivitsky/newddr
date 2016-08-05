@@ -19,6 +19,7 @@
 <spring:message code="label.place_you_order" var="place_you_order"/>
 <spring:message code="label.place_all_you_order" var="place_all_you_order"/>
 <spring:message code="label.print_you_order" var="print_you_order"/>
+<spring:message code="label.print_all_you_order" var="print_all_you_order"/>
 
 <c:url var="cancelImgUrl" value="/resources/img/cancel.png"/>
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
