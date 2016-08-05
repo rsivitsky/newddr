@@ -117,11 +117,13 @@
                            class="btn btn-primary glyphicon glyphicon-shopping-cart"
                            role="button">${place_all_you_order}</a>
                     </td>
-                    <td class="col-md-1">
-                        <a href="${printAllYourOrdersUrl}"
-                           class="btn btn-primary glyphicon glyphicon-print"
-                           role="button">${print_all_you_order}</a>
-                    </td>
+                    <c:if test="${sessionScope.anonym==null}">
+                        <td class="col-md-1">
+                            <a href="${printAllYourOrdersUrl}"
+                               class="btn btn-primary glyphicon glyphicon-print"
+                               role="button">${print_all_you_order}</a>
+                        </td>
+                    </c:if>
                 </c:if>
             </tr>
         </table>

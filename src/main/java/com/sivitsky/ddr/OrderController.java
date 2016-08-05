@@ -119,10 +119,13 @@ public class OrderController {
     }
 
     @RequestMapping("/order/print/all")
-    public ModelAndView printPdfAllOrders(User user) {
-        List<Order> orderList = orderService.getOrdersByUserId(user);
+    public ModelAndView printPdfAllOrders(User user, Principal principal) {
         ModelAndView model = new ModelAndView();
         model.setViewName("allOrderPdfView");
+        List<Order> orderList = new ArrayList<Order>();
+        if (principal != null) {
+            orderList = orderService.getOrdersByUserId(user);
+        }
         if (orderList.size() > 0) {
             model.addObject("listOrders", orderService.getOrdersByUserId(user));
         }

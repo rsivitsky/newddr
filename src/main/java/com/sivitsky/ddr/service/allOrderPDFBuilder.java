@@ -25,15 +25,15 @@ public class allOrderPDFBuilder extends AbstractITextPdfView {
         List<Order> orderList = new ArrayList<Order>();
         try {
             orderList = (List<Order>) model.get("listOrders");
-        } catch (NullPointerException e) {
-            System.err.println("Caught NullPointerException: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Caught Exception: " + e.getMessage());
         }
         ;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
         Date date = new Date();
         doc.add(new Paragraph("Order list" + " from " + dateFormat.format(date)));
 
-        if (orderList.size() > 0) {
+        if (orderList != null) {
             PdfPTable table = new PdfPTable(5);
             table.setWidthPercentage(100.0f);
             table.setWidths(new float[]{3.0f, 2.0f, 2.0f, 2.0f, 1.0f});
