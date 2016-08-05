@@ -199,13 +199,4 @@ public class HomeController {
         Part part = partService.getPartById(part_id);
         return part.getPhoto();
     }
-
-    /*
-    @RequestMapping(value = "/downloadPDF", method = RequestMethod.GET)
-    public ModelAndView downloadExcel() {
-        // create some sample data
-
-        // return a view which will be resolved by an excel view resolver
-        return new ModelAndView("pdfView");
-    }*/
 }

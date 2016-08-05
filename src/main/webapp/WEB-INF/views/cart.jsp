@@ -110,16 +110,19 @@
                 <td class="col-md-8">
 
                 </td>
-                <td class="col-md-1">
-                    <c:if test="${having_new_order==true}">
+
+                <c:if test="${having_new_order==true}">
+                    <td class="col-md-1">
                         <a href="${placeAllYourOrdersUrl}"
                            class="btn btn-primary glyphicon glyphicon-shopping-cart"
                            role="button">${place_all_you_order}</a>
+                    </td>
+                    <td class="col-md-1">
                         <a href="${printAllYourOrdersUrl}"
                            class="btn btn-primary glyphicon glyphicon-print"
                            role="button">${print_all_you_order}</a>
-                    </c:if>
-                </td>
+                    </td>
+                </c:if>
             </tr>
         </table>
     </form>

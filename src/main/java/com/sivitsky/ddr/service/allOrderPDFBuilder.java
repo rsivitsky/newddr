@@ -64,8 +64,6 @@ public class allOrderPDFBuilder extends AbstractITextPdfView {
             cell.setPhrase(new Phrase("Order status", font));
             table.addCell(cell);
 
-            // write table row data
-
             for (Order order : orderList) {
                 table.addCell(order.getPart().getPart_name());
                 table.addCell(order.getOffer().getOffer_price().toString());
@@ -73,7 +71,6 @@ public class allOrderPDFBuilder extends AbstractITextPdfView {
                 table.addCell(order.getBooking_sum().toString());
                 table.addCell(order.getBooking_status());
             }
-
             doc.add(table);
         } else {
             doc.add(new Paragraph("Your Order list is empty"));
