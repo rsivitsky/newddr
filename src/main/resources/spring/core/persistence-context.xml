@@ -9,37 +9,26 @@
 
     <jpa:repositories base-package="com.sivitsky.ddr.repository"/>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <!--<property name="url" value="jdbc:mysql://localhost:3307/offersdb"/>-->
-        <!--<property name="username" value="offersdb"/>-->
-        <!--<property name="password" value="offersdb"/>-->
-        <property name="url" value="jdbc:mysql://localhost:3306/offersdb"/>
-        <property name="username" value="root"/>
-        <property name="password" value="1111"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${db.driver}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.user}"/>
+        <property name="password" value="${db.password}"/>
     </bean>
 
     <!-- Hibernate 4 SessionFactory Bean definition -->
-    <bean id="hibernate4AnnotatedSessionFactory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <bean id="hibernate4AnnotatedSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.sivitsky.ddr.model"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.dialect">${db.dialect}</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
                 <prop key="hibernate.hbm2ddl.auto">validate</prop>
             </props>
         </property>
     </bean>
-
-    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
-
-    <!--<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
-    <!--<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>-->
-    <!--</bean>-->
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="default"/>
@@ -47,17 +36,16 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaPropertyMap">
             <map>
-                <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+                <entry key="hibernate.dialect" value="${db.dialect}"/>
                 <entry key="hibernate.hbm2ddl.auto" value="update"/>
                 <!--Disabling auto detection-->
                 <entry key="hibernate.archive.autodetection" value=""/>
 
-                <entry key="hibernate.cache.region.factory_class"
-                       value="org.hibernate.cache.internal.NoCachingRegionFactory"/>
+                <entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.internal.NoCachingRegionFactory"/>
+
                 <!--We can cache the exact results of a query by setting the hibernate.cache.use_query_cache property-->
                 <!--Then, we can use the query.setHint("org.hibernate.cacheable", true) method on any query we wish to cache.-->
                 <entry key="hibernate.cache.use_query_cache" value="false"/>
-
                 <entry key="hibernate.show_sql" value="false"/>
                 <entry key="hibernate.format_sql" value="false"/>
                 <entry key="hibernate.use_sql_comments" value="false"/>

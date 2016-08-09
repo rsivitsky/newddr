@@ -10,7 +10,7 @@ import java.util.List;
 public class CurrencyServiceImpl implements CurrencyService {
 
     public List<String> getCurrencies() {
-        List<String> listCurrencies = new ArrayList<String>();
+        List<String> listCurrencies = new ArrayList<>();
         listCurrencies.add(ListCurrency.BYR.toString());
         listCurrencies.add(ListCurrency.EUR.toString());
         listCurrencies.add(ListCurrency.RUR.toString());

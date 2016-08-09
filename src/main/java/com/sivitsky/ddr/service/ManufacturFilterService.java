@@ -3,7 +3,9 @@ package com.sivitsky.ddr.service;
 import com.sivitsky.ddr.model.Manufactur;
 
 public class ManufacturFilterService {
+
     private Manufactur manufactur;
+
     private Boolean usage;
 
     public Manufactur getManufactur() {

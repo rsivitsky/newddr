@@ -6,14 +6,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+            </list>
+        </property>
+    </bean>
+
     <context:component-scan base-package="com.sivitsky.ddr"/>
     <context:annotation-config/>
+
     <!--It's better to use interface proxy, so using proxy-target-class="false"-->
     <aop:aspectj-autoproxy proxy-target-class="false"/>
-
-
-    <!-- Root Context: defines shared resources visible to all other web components -->
-    <!--<import resource="security-context.xml"/>-->
-    <!--<import resource="persistence-context.xml"/>-->
-    <!--<import resource="spring-mail.xml"/>-->
 </beans>

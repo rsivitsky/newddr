@@ -23,12 +23,16 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
     @Autowired
     private PartService partService;
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private OfferService offerService;
+
     @Autowired
     private IMailService mailService;
 
@@ -90,7 +94,7 @@ public class OrderController {
                 user = userService.getUserByEmail(principal.getName());
             }
             List<Order> listOrders = orderService.getNewOrdersByUserId(user);
-            List<String> listPartNames = new ArrayList();
+            List<String> listPartNames = new ArrayList<>();
             if (listOrders != null) {
                 for (Order order : listOrders) {
                     orderService.changeOrderStatus(order.getBooking_id(), OrderStatus.ORDERED.toString());
@@ -122,7 +126,7 @@ public class OrderController {
     public ModelAndView printPdfAllOrders(User user, Principal principal) {
         ModelAndView model = new ModelAndView();
         model.setViewName("allOrderPdfView");
-        List<Order> orderList = new ArrayList<Order>();
+        List<Order> orderList = new ArrayList<>();
         if (principal != null) {
             orderList = orderService.getOrdersByUserId(user);
         }

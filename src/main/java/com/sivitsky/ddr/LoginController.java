@@ -5,7 +5,6 @@ import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.service.IMailService;
 import com.sivitsky.ddr.service.RoleService;
 import com.sivitsky.ddr.service.UserService;
-import com.sivitsky.ddr.service.VendorService;
 import com.sparkpost.exception.SparkPostException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,12 +28,13 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+
     @Autowired
     private RoleService roleService;
-    @Autowired
-    private VendorService vendorService;
+
     @Autowired
     private IMailService mailService;
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -76,7 +76,6 @@ public class LoginController {
     }
 
     public void autoLogin(String email, String password, HttpServletRequest request) {
-
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, password);
         Authentication authentication = authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authentication);

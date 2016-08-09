@@ -42,7 +42,7 @@ public class Description implements Serializable {
         this.descript_value = descript_value;
     }
 
-    @ManyToOne(targetEntity=Part.class, fetch=FetchType.EAGER)
+    @ManyToOne(targetEntity = Part.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "part_id")
     public Part getPart() {
         return part;
@@ -52,7 +52,7 @@ public class Description implements Serializable {
         this.part = part;
     }
 
-    @ManyToOne(targetEntity=Specification.class, fetch=FetchType.EAGER)
+    @ManyToOne(targetEntity = Specification.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "spec_id")
     public Specification getSpecification() {
         return specification;

@@ -21,8 +21,10 @@ public class PartController {
 
     @Autowired
     private PartService partService;
+
     @Autowired
     private ManufacturService manufacturService;
+
     @Autowired
     private DescriptionService descriptionService;
 

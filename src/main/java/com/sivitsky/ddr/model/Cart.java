@@ -29,6 +29,7 @@ public class Cart implements Serializable {
 
     @OneToOne//s(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
+
     // @PrimaryKeyJoinColumn
     public User getUser() {
         return user;

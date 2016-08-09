@@ -12,7 +12,7 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name = "Order.getOrderesByVendorId", query = "select o.booking_date, o.part.part_name, o.booking_num, o.booking_status " +
                 "from Order o join o.offer off join off.vendor ven " +
-                "where ven.vendor_id = :vendor_id" ),
+                "where ven.vendor_id = :vendor_id"),
         @NamedQuery(name = "Order.getOrderesByUserId", query = "select booking_date, part.part_name, booking_num, booking_status from Order " +
                 "where user = :user and booking_status in (:booking_status)"),
         @NamedQuery(name = "Order.getCountAndSumOrdersByUserId", query = "select count(booking_id) as cart_num, " +
@@ -59,7 +59,7 @@ public class Order implements Serializable {
     }
 
     @Column(name = "booking_date")
-    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     public Date getBooking_date() {
         return booking_date;
     }
@@ -68,7 +68,7 @@ public class Order implements Serializable {
         this.booking_date = booking_date;
     }
 
-    @ManyToOne(targetEntity=Offer.class, fetch=FetchType.EAGER)
+    @ManyToOne(targetEntity = Offer.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "offer_id")
     public Offer getOffer() {
         return offer;
@@ -88,7 +88,7 @@ public class Order implements Serializable {
         this.user = user;
     }
 
-    @ManyToOne(targetEntity=Part.class, fetch=FetchType.EAGER)
+    @ManyToOne(targetEntity = Part.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "part_id")
     public Part getPart() {
         return part;
