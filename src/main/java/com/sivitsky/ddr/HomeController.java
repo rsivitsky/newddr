@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -197,8 +199,12 @@ public class HomeController {
 
     @RequestMapping(value = "/part/photo/{part_id}", method = RequestMethod.GET)
     @ResponseBody
-    public byte[] downloadPhoto(@PathVariable("part_id") Long part_id) {
+    public void downloadPhoto(@PathVariable("part_id") Long part_id, HttpServletResponse httpServletResponse) throws IOException {
         Part part = partService.getPartById(part_id);
-        return part.getPhoto();
+        byte[] imageBytes = part.getPhoto();
+        httpServletResponse.setContentType("image/jpeg");
+        httpServletResponse.setContentLength(imageBytes.length);
+        httpServletResponse.getOutputStream().write(imageBytes);
+        // return imageBytes;
     }
 }
