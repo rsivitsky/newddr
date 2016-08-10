@@ -116,4 +116,14 @@ public class OfferDAOImpl implements OfferDAO {
                     .uniqueResult();
         }
     }
+
+    @SuppressWarnings("unchecked")
+    public Object getCountOffersByOnlyManufacturs(Long[] mas_id) {
+        String hql = "select distinct count(part.part_name) as count_part_name " +
+                "from Part part " +
+                "where (part.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id)))";
+
+        return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("mas_id", mas_id)
+                .uniqueResult();
+    }
 }

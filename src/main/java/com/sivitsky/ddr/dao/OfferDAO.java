@@ -20,6 +20,8 @@ public interface OfferDAO {
 
     Object getCountOffers(Long[] mas_id, Float price_from, Float price_to);
 
+    Object getCountOffersByOnlyManufacturs(Long[] mas_id);
+
     Object getOffersMaxAndMinPrice(Long id, Float price_from, Float price_to);
 
     void removeOffer(Long id);

@@ -58,4 +58,9 @@ public class OfferServiceImpl implements OfferService {
     public Object getCountOffers(Long[] mas_id, Float price_from, Float price_to) {
         return this.offerDAO.getCountOffers(mas_id, price_from, price_to);
     }
+
+    @Transactional
+    public Object getCountOffersByOnlyManufacturs(Long[] mas_id) {
+        return this.offerDAO.getCountOffersByOnlyManufacturs(mas_id);
+    }
 }

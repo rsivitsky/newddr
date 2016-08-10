@@ -170,7 +170,8 @@ public class HomeController {
             }
             listPart = offerService.listOffersByManufactIdAndPrice(l_array_manufacturs, Float.parseFloat(session.getAttribute("price_from").toString()), Float.parseFloat(session.getAttribute("price_to").toString()), (page - 1) * recordsPerPage, recordsPerPage);
             model.addAttribute("listPart", listPart);
-            noOfRecords = Integer.parseInt(offerService.getCountOffers(l_array_manufacturs, Float.parseFloat(session.getAttribute("price_from").toString()), Float.parseFloat(session.getAttribute("price_to").toString())).toString());
+            //noOfRecords = Integer.parseInt(offerService.getCountOffers(l_array_manufacturs, Float.parseFloat(session.getAttribute("price_from").toString()), Float.parseFloat(session.getAttribute("price_to").toString())).toString());
+            noOfRecords = Integer.parseInt(offerService.getCountOffersByOnlyManufacturs(l_array_manufacturs).toString());
         } else {
             listPart = partService.listPartWithDetail((page - 1) * recordsPerPage, recordsPerPage);
             model.addAttribute("listPart", listPart);
