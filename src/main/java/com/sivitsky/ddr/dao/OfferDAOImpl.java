@@ -100,7 +100,7 @@ public class OfferDAOImpl implements OfferDAO {
             String hql = "select count(part.part_name) as count_part_name " +
                     "from Offer offer join offer.part part " +
                     "where (:price_from=0.0f or offer.offer_price >= :price_from) " +
-                    " and (:price_to=0.0f or offer.offer_price <= :price_to) ";
+                    " and (:price_to=0.0f or offer.offer_price <= :price_to)  group by part.part_name";
 
             return sessionFactory.getCurrentSession().createQuery(hql)
                     .setParameter("price_from", price_from)
@@ -108,22 +108,12 @@ public class OfferDAOImpl implements OfferDAO {
         } else {
             String hql = "select count(part.part_name) as count_part_name " +
                     "from Offer offer join offer.part part " +
-                    "where (:price_from=0.0f or offer.offer_price >= :price_from) and (:price_to=0.0f or offer.offer_price <= :price_to) and (part.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id)))";
+                    "where (:price_from=0.0f or offer.offer_price >= :price_from) and (:price_to=0.0f or offer.offer_price <= :price_to) and (part.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id))) group by part.part_name";
 
             return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("mas_id", mas_id)
                     .setParameter("price_from", price_from)
                     .setParameter("price_to", price_to)
                     .uniqueResult();
         }
-    }
-
-    @SuppressWarnings("unchecked")
-    public Object getCountOffersByOnlyManufacturs(Long[] mas_id) {
-        String hql = "select distinct count(part.part_name) as count_part_name " +
-                "from Part part " +
-                "where (part.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id)))";
-
-        return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("mas_id", mas_id)
-                .uniqueResult();
     }
 }

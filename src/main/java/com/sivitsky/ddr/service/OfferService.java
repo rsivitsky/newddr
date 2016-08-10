@@ -18,8 +18,6 @@ public interface OfferService {
 
     Object getCountOffers(Long[] mas_id, Float price_from, Float price_to);
 
-    Object getCountOffersByOnlyManufacturs(Long[] mas_id);
-
     void removeOffer(Long id);
 
     Offer getOfferById(Long id);

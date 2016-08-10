@@ -58,4 +58,5 @@ public class PartServiceImpl implements PartService {
     public Integer getCountOfPart() {
         return partDAO.getCountOfPart();
     }
+
 }

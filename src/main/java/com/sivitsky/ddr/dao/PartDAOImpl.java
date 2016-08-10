@@ -86,4 +86,5 @@ public class PartDAOImpl implements PartDAO {
                 .getNamedQuery("Part.findAllWithDetail")
                 .list().size();
     }
+
 }
