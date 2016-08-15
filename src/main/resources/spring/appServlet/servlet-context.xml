@@ -36,17 +36,6 @@
                 p:defaultEncoding="UTF8"
     />
 
-    <!-- 1 -->
-    <!--<beans:bean class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"
-                id="localeResolver" />-->
-    <!-- 2 -->
-    <!--<beans:bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
-                id="localeResolver" p:cookieName="localeUser" p:defaultLocale="en_US"/>
-    -->
-    <!-- 3 -->
-    <!--<beans:bean class="org.springframework.web.servlet.i18n.FixedLocaleResolver"
-                id="localeResolver" p:defaultLocale="en_US"/>-->
-    <!-- 4 -->
     <beans:bean class="org.springframework.web.servlet.i18n.SessionLocaleResolver"
                 id="localeResolver" p:defaultLocale="en_US"/>
 
@@ -54,28 +43,6 @@
         <beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
                     p:paramName="lang"/>
     </interceptors>
-
-    <!-- Resolves views selected for rendering by @Controllers to .jsp resources
-        in the /WEB-INF/views directory -->
-
-    <!--delete this bean for setting Apache tiles below
-    <beans:bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <beans:property name="viewClass"
-                  value="org.springframework.web.servlet.view.JstlView" />
-        <beans:property name="prefix" value="/WEB-INF/views/"/>
-        <beans:property name="suffix" value=".jsp"/>
-    </beans:bean>-->
-
-
-    <!--<interceptors>
-    <beans:bean
-            class="org.springframework.web.servlet.theme.ThemeChangeInterceptor"/>
-    <beans:bean
-            class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
-            p:paramName="lang"/>
-    </interceptors>-->
-
 
     <!--configuration Apache Tiles-->
     <beans:bean

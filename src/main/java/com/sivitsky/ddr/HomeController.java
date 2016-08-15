@@ -206,6 +206,5 @@ public class HomeController {
         httpServletResponse.setContentType("image/jpeg");
         httpServletResponse.setContentLength(imageBytes.length);
         httpServletResponse.getOutputStream().write(imageBytes);
-        // return imageBytes;
     }
 }

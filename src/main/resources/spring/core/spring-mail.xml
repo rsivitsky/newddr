@@ -18,17 +18,34 @@
             </props>
         </property>
         -->
-        <property name="host" value="smtp.sparkpostmail.com"/>
-        <property name="port" value="587"/>
 
+        <!--<property name="host" value="smtp.sparkpostmail.com"/>
+        <property name="port" value="587"/>
         <property name="username" value="SMTP_Injection"/>
         <property name="password" value="pansivitsky_apikey"/>
-
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.transport.protocol">smtp</prop>
                 <prop key="mail.smpt.host>">smtp.sparkpostmail.com</prop>
                 <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.auth.login.disable">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.ssl.trust">*</prop>
+            </props>
+        </property>
+        -->
+
+        <property name="host" value="${mail.host}"/>
+        <property name="port" value="${mail.port}"/>
+
+        <property name="username" value="${mail.username}"/>
+        <property name="password" value="${mail.password}"/>
+
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">${mail.transport.protocol}</prop>
+                <prop key="mail.smpt.host>">${mail.smpt.host}</prop>
+                <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
                 <prop key="mail.smtp.auth.login.disable">true</prop>
                 <prop key="mail.smtp.starttls.enable">true</prop>
                 <prop key="mail.smtp.ssl.trust">*</prop>
