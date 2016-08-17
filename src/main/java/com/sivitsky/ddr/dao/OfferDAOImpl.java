@@ -62,8 +62,8 @@ public class OfferDAOImpl implements OfferDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Offer> getOffersByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to, Integer firstResult, Integer maxResult) {
-        if (mas_id.length == 0) {
+    public List<Offer> getOffersByManufactIdAndPrice(List<Long> mas_id, Float price_from, Float price_to, Integer firstResult, Integer maxResult) {
+        if (mas_id.size() == 0) {
             String hql = "select min(offer.offer_price) as min_price, count (offer.offer_id) as offer_count, part.part_id as part_id, part.part_name as part_name,  " +
                     " offer.currency as valuta_name " +
                     "from Offer offer join offer.part part " +
@@ -95,20 +95,20 @@ public class OfferDAOImpl implements OfferDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public Object getCountOffers(Long[] mas_id, Float price_from, Float price_to) {
-        if (mas_id.length == 0) {
-            String hql = "select count(part.part_name) as count_part_name " +
+    public Object getCountOffers(List<Long> mas_id, Float price_from, Float price_to) {
+        if (mas_id.size() == 0) {
+            String hql = "select count(distinct part.part_name) as count_part_name " +
                     "from Offer offer join offer.part part " +
                     "where (:price_from=0.0f or offer.offer_price >= :price_from) " +
-                    " and (:price_to=0.0f or offer.offer_price <= :price_to)  group by part.part_name";
+                    " and (:price_to=0.0f or offer.offer_price <= :price_to)";
 
             return sessionFactory.getCurrentSession().createQuery(hql)
                     .setParameter("price_from", price_from)
                     .setParameter("price_to", price_to).uniqueResult();
         } else {
-            String hql = "select count(part.part_name) as count_part_name " +
+            String hql = "select count(distinct part.part_name) as count_part_name " +
                     "from Offer offer join offer.part part " +
-                    "where (:price_from=0.0f or offer.offer_price >= :price_from) and (:price_to=0.0f or offer.offer_price <= :price_to) and (part.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id))) group by part.part_name";
+                    "where (:price_from=0.0f or offer.offer_price >= :price_from) and (:price_to=0.0f or offer.offer_price <= :price_to) and (part.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id)))";
 
             return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("mas_id", mas_id)
                     .setParameter("price_from", price_from)

@@ -66,7 +66,7 @@
             <sec:authorize access="hasAnyRole('ROLE_VENDOR')">
                 <li><a href="${orderUrl}">${order}</a></li>
             </sec:authorize>
-            <li class="active"><a href="${aboutUrl}">${about}</a></li>
+            <li><a href="${aboutUrl}">${about}</a></li>
             <sec:authorize access="isAuthenticated()">
                 <li><a href="/account">${account}</a></li>
             </sec:authorize>

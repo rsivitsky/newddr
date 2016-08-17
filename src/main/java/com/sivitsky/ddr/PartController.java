@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,7 +46,6 @@ public class PartController {
     @RequestMapping(value = "/part/add", method = RequestMethod.POST)
     public String addPartPost(@Valid Part part, BindingResult result, @RequestParam(value = "img_file", required = false) javax.servlet.http.Part img_file) {
         if (result.hasErrors()) {
-            //return "part";
             return "redirect:/part/list";
         } else {
             if (img_file.getSize() != 0) {
@@ -76,7 +76,6 @@ public class PartController {
         model.addAttribute("part", this.partService.getPartById(part_id));
         model.addAttribute("listPart", partService.listPart());
         model.addAttribute("listManufactur", manufacturService.listManufactur());
-        //return "add_part";
         return "part";
     }
 
@@ -85,5 +84,16 @@ public class PartController {
         model.addAttribute("part", this.partService.getPartById(part_id));
         model.addAttribute("descriptions", this.descriptionService.listDescriptionByPartId(part_id));
         return "partDescription";
+    }
+
+    @RequestMapping(value = "/part/photo/{part_id}", method = RequestMethod.GET)
+    @ResponseBody
+    public void downloadPhoto(@PathVariable("part_id") Long part_id, HttpServletResponse httpServletResponse) throws IOException {
+        Part part = partService.getPartById(part_id);
+        byte[] imageBytes = part.getPhoto();
+        httpServletResponse.setContentType("image/jpeg");
+        httpServletResponse.setContentLength(imageBytes.length);
+        httpServletResponse.getOutputStream().write(imageBytes);
+        httpServletResponse.getOutputStream().flush();
     }
 }

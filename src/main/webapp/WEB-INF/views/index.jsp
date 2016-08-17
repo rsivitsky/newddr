@@ -20,7 +20,7 @@
 </c:if>
 
 <div class="col-md-3">
-    <form method="get" role="form">
+    <form method="get" role="form" enctype="multipart/form-data">
         <label class="control-label">${producer}</label>
         <c:forEach items="${manufacturFilterList}" var="manufacturFilter">
             <div class="checkbox col-lg-push-1">

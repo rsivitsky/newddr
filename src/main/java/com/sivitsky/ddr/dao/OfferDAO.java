@@ -16,9 +16,9 @@ public interface OfferDAO {
 
     List<Offer> getOffersByPartId(Long id, Float price_from, Float price_to);
 
-    List<Offer> getOffersByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to, Integer firstResult, Integer maxResult);
+    List<Offer> getOffersByManufactIdAndPrice(List<Long> mas_id, Float price_from, Float price_to, Integer firstResult, Integer maxResult);
 
-    Object getCountOffers(Long[] mas_id, Float price_from, Float price_to);
+    Object getCountOffers(List<Long> mas_id, Float price_from, Float price_to);
 
     Object getOffersMaxAndMinPrice(Long id, Float price_from, Float price_to);
 

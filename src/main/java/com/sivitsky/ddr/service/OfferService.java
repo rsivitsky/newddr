@@ -14,9 +14,9 @@ public interface OfferService {
 
     List<Offer> getOffersByPartId(Long part_id, Float price_from, Float price_to);
 
-    List<Offer> listOffersByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to, Integer firstResult, Integer maxResult);
+    List<Offer> listOffersByManufactIdAndPrice(List<Long> mas_id, Float price_from, Float price_to, Integer firstResult, Integer maxResult);
 
-    Object getCountOffers(Long[] mas_id, Float price_from, Float price_to);
+    Object getCountOffers(List<Long> mas_id, Float price_from, Float price_to);
 
     void removeOffer(Long id);
 

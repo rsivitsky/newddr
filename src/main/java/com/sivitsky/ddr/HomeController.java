@@ -1,17 +1,21 @@
 package com.sivitsky.ddr;
 
-import com.sivitsky.ddr.model.*;
+import com.sivitsky.ddr.model.Cart;
+import com.sivitsky.ddr.model.Manufactur;
+import com.sivitsky.ddr.model.Order;
+import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.repository.UserRepository;
 import com.sivitsky.ddr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +51,8 @@ public class HomeController {
         }
     }
 
-    void setUsageAsTrue(Long[] array_manufacturs) {
-        for (Long select_id : array_manufacturs) {
+    void setUsageAsTrue(List<Long> listManufacturs) {
+        for (Long select_id : listManufacturs) {
             for (ManufacturFilterService manufacturFilter : manufacturFilterList) {
                 if (manufacturFilter.getManufactur().getManufactur_id().equals(select_id)) {
                     manufacturFilter.setUsage(true);
@@ -155,22 +159,27 @@ public class HomeController {
             page = 1;
         }
 
-        Long[] l_array_manufacturs;
+        // Long[] l_array_manufacturs;
+
+        List<Long> listManufacturs = new ArrayList<>();
+
         int noOfRecords = 0;
         List listPart;
         if (array_manufacturs != null && array_manufacturs.length > 0 || Float.parseFloat(session.getAttribute("price_from").toString()) != 0 || Float.parseFloat(session.getAttribute("price_to").toString()) != 0) {
             if (array_manufacturs != null) {
-                l_array_manufacturs = new Long[array_manufacturs.length];
+                //l_array_manufacturs = new Long[array_manufacturs.length];
                 for (int i = 0; i < array_manufacturs.length; i++) {
-                    l_array_manufacturs[i] = Long.parseLong(array_manufacturs[i]);
+                    //l_array_manufacturs[i] = Long.parseLong(array_manufacturs[i]);
+                    listManufacturs.add(Long.parseLong(array_manufacturs[i]));
                 }
-                setUsageAsTrue(l_array_manufacturs);
+                //setUsageAsTrue(l_array_manufacturs);
+                setUsageAsTrue(listManufacturs);
             } else {
-                l_array_manufacturs = new Long[0];
+                //l_array_manufacturs = new Long[0];
             }
-            listPart = offerService.listOffersByManufactIdAndPrice(l_array_manufacturs, Float.parseFloat(session.getAttribute("price_from").toString()), Float.parseFloat(session.getAttribute("price_to").toString()), (page - 1) * recordsPerPage, recordsPerPage);
+            listPart = offerService.listOffersByManufactIdAndPrice(listManufacturs, Float.parseFloat(session.getAttribute("price_from").toString()), Float.parseFloat(session.getAttribute("price_to").toString()), (page - 1) * recordsPerPage, recordsPerPage);
             model.addAttribute("listPart", listPart);
-            Object countOfRec = offerService.getCountOffers(l_array_manufacturs, Float.parseFloat(session.getAttribute("price_from").toString()), Float.parseFloat(session.getAttribute("price_to").toString()));
+            Object countOfRec = offerService.getCountOffers(listManufacturs, Float.parseFloat(session.getAttribute("price_from").toString()), Float.parseFloat(session.getAttribute("price_to").toString()));
             noOfRecords = Integer.parseInt((countOfRec == null) ? "1" : countOfRec.toString());
         } else {
             listPart = partService.listPartWithDetail((page - 1) * recordsPerPage, recordsPerPage);
@@ -198,13 +207,12 @@ public class HomeController {
         return "index";
     }
 
+ /*
     @RequestMapping(value = "/part/photo/{part_id}", method = RequestMethod.GET)
     @ResponseBody
-    public void downloadPhoto(@PathVariable("part_id") Long part_id, HttpServletResponse httpServletResponse) throws IOException {
+    public byte [] downloadsPhoto (@PathVariable("part_id") Long part_id) {
+        //Contact contact = contactService.findВyid(id);
         Part part = partService.getPartById(part_id);
-        byte[] imageBytes = part.getPhoto();
-        httpServletResponse.setContentType("image/jpeg");
-        httpServletResponse.setContentLength(imageBytes.length);
-        httpServletResponse.getOutputStream().write(imageBytes);
-    }
+        return part.getPhoto();
+    }*/
 }
