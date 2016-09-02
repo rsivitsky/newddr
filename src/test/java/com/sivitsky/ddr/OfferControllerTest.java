@@ -1,14 +1,46 @@
 package com.sivitsky.ddr;
 
+import com.sivitsky.ddr.model.User;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.WebApplicationContext;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
+@SessionAttributes("user")
+@ContextConfiguration(locations = {"classpath*:spring/core/*.xml"})
+@WebAppConfiguration
+@RunWith(SpringJUnit4ClassRunner.class)
 public class OfferControllerTest {
 
+    @Autowired
+    WebApplicationContext wac;
+
+    private MockMvc mockMvc;
+
+    @Before
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
+
     @Test
-    public void testSomething() throws Exception {
-        assertThat("Something is equal to 10", Integer.valueOf("10"), is(10));
+    public void testListOffers() throws Exception {
+        final User user = new User();
+        ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get("/offers")
+                .sessionAttr("user", user))
+                .andExpect(MockMvcResultMatchers.view().name("offer"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("offer"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("listPart"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("listVendor"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("listCurrency"));
     }
 }
