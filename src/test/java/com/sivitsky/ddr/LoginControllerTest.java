@@ -9,7 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -37,7 +36,7 @@ public class LoginControllerTest {
 
     @Test
     public void testRegistration() throws Exception {
-        ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get("/registration"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/registration"))
                 .andExpect(MockMvcResultMatchers.view().name("quick_registration"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("user"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("listRolesWithoutAdmin"));
@@ -45,7 +44,7 @@ public class LoginControllerTest {
 
     @Test
     public void testSaveUser() throws Exception {
-        ResultActions result = mockMvc.perform(MockMvcRequestBuilders.post("/registration/save")
+        mockMvc.perform(MockMvcRequestBuilders.post("/registration/save")
                 .param("firstname", "firstname")
                 .param("lastname", "lastname")
                 .param("login", "login")
