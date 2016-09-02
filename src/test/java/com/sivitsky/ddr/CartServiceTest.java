@@ -7,8 +7,6 @@ import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.model.Vendor;
 import com.sivitsky.ddr.service.CartService;
 import com.sivitsky.ddr.service.OrderService;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,13 +19,6 @@ import static org.mockito.Mockito.when;
 
 public class CartServiceTest {
     private final List<Cart> carts = new ArrayList<Cart>();
-
-    @Autowired
-    private SessionFactory sessionFactory;
-    private Session session;
-
-    @Autowired
-    private CartDAO cartDAO;
 
     @Autowired
     private CartService cartService;

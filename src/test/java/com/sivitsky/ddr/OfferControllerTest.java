@@ -9,14 +9,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 
-@SessionAttributes("user")
 @ContextConfiguration(locations = {"classpath*:spring/core/*.xml"})
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,7 +32,7 @@ public class OfferControllerTest {
     @Test
     public void testListOffers() throws Exception {
         final User user = new User();
-        ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get("/offers")
+        mockMvc.perform(MockMvcRequestBuilders.get("/offers")
                 .sessionAttr("user", user))
                 .andExpect(MockMvcResultMatchers.view().name("offer"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("offer"))
